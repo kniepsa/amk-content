@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (if any tools added later)
+node_modules/
+
+# Drafts that aren't ready
+articles/drafts/WIP-*
+
+# Sensitive
+*.env
+*.local

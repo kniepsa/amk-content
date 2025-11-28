@@ -1,0 +1,28 @@
+# ============================================
+# Vibe Coding Aliases and Functions
+# ============================================
+
+# Claude shortcuts
+alias cc='claude --continue'
+alias cr='claude --resume'
+alias cn='claude'
+
+# Project quick-jump - opens Claude interactively
+# Run /warmup manually after entering
+resto() { cd ~/projects/restaurant-os && claude --continue; }
+salvator() { cd ~/projects/salvator-standalone && claude --continue; }
+hoettche() { cd ~/projects/em-hoettche-restaurant-standalone && claude --continue; }
+invoices() { cd ~/projects/HG-WE10/invoice-splitter && claude --continue; }
+sdk() { cd ~/projects/restaurant-os-sdk && claude --continue; }
+
+# Printulu project shortcuts
+printulu() { cd ~/projects/printulu/printulu-vendure && claude --continue; }
+printulu-fe() { cd ~/projects/printulu/printulu-vendure/frontend && claude --continue; }
+printulu-be() { cd ~/projects/printulu/printulu-vendure/backend && claude --continue; }
+
+# Dev server shortcuts
+resto-dev() { cd ~/projects/restaurant-os && pnpm dev; }
+salvator-dev() { cd ~/projects/salvator-standalone && pnpm dev; }
+hoettche-dev() { cd ~/projects/em-hoettche-restaurant-standalone && pnpm dev; }
+printulu-fe-dev() { cd ~/projects/printulu/printulu-vendure/frontend && pnpm dev; }
+printulu-be-dev() { cd ~/projects/printulu/printulu-vendure/backend && npm run dev; }

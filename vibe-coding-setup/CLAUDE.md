@@ -22,6 +22,9 @@ User Need → TypeScript/Next.js → Service Layer → Supabase RLS → Vercel D
 - Vercel: Use edge runtime for fast cold starts
 - Next.js 14: App Router metadata must be in page.tsx, not layout.tsx
 - Supabase: Always handle .error before .data
+- When planning complex products: Start with user journey, then build backwards to technical requirements
+- Market research BEFORE building: $26-37B no-code market (Lovable, Bolt, Bubble dominate non-technical segment)
+- For semi-technical entrepreneurs: GUI wrapper > pure CLI (visual feedback reduces terminal fear)
 
 ## API Error Handling
 - ALWAYS return full validation error details in API responses (status 400)

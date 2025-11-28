@@ -1,31 +1,24 @@
-# Vibe Coding Setup - Improvements
+# Vibe Coding Setup - Next Actions
+
+## Done (2025-11)
+- [x] Created golden path templates (CLAUDE.md, NEXT.md, DEBT.md, README-template.md, .env.example)
+- [x] Created ADR templates in decisions/ folder
+- [x] Updated /init-project command to scaffold full golden path
+- [x] Created /audit-structure slash command
+- [x] Migrated all 4 projects to golden path (restaurant-os, salvator, em-hoettche, SDK)
+- [x] Committed and pushed golden path implementation to GitHub
+- [x] Created /shipped command (NEXT.md + Notion sync)
 
 ## Now
-- [ ] Add /refactor command with code quality personas
+- [ ] Test /shipped command on projects
+
+## Up Next
+- [ ] Create /refactor command with code quality personas
 - [ ] Create /review command with security-focused prompts
-
-## Next
-- [ ] Add /explain command for teaching/documentation mode
-- [ ] Create /test command with TDD-focused workflow
-
-## Later
 - [ ] Add project templates for quick bootstrapping
-- [ ] Create /sync-all command to sync all projects at once
-- [ ] Add hooks for pre-commit validation
-- [ ] Create /metrics command to track productivity patterns
 
-## Done
-- [x] Set up amk-content GitHub repo
-- [x] Create /sync-vibe-setup command
-- [x] Add Notion workflow to global CLAUDE.md
-- [x] Configure teamspaces (Bonn Gastro, Knibo Invest, Printulu)
-- [x] Update /session-end with content ideas capture
-- [x] Research screenshot MCP options (Playwright recommended)
-- [x] Research Claude Skills architecture
-- [x] Create /debug command with debugging prompts
-- [x] Create /strategy command with personas
-- [x] Create project-specific /session-end for amk-content (auto-research)
-- [x] Create brand guides for Gamma (Knibo Invest, Printulu, Salvator, Em Höttche)
-- [x] Add Microsoft Playwright MCP (23.7K stars, best option)
-- [x] Create Claude Skills (vibe-coding, restaurant-os, notion-workflow)
-- [x] Deep research: Chrome DevTools vs Playwright vs Browserbase comparison
+## Backlog
+- [ ] Create /explain command for teaching/documentation mode
+- [ ] Create /test command with TDD-focused workflow
+- [ ] Add /sync-all command to sync all projects at once
+- [ ] Create /metrics command to track productivity patterns

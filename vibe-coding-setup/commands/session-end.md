@@ -21,15 +21,35 @@ Update `.claude/NEXT.md`:
 - Add any new tasks discovered
 - Ensure "Now" has the next priority item
 
-## 5. Output Checklist
+## 5. Content Ideas (for tech-savvy entrepreneurs)
+Was there anything interesting that could become content?
+- Strategy sessions or pivots
+- Tool discoveries or workflow improvements
+- Go-to-market insights
+- Architecture decisions with business impact
+- Vibe coding tips and productivity hacks
+
+If YES → Append to `~/projects/amk-content/articles/ideas.md`:
+```markdown
+## [Date] - [One-line title]
+**Category**: [Strategy | Tools | Architecture | Vibe Coding | GTM]
+**Hook**: [Why would an entrepreneur care?]
+**Key points**:
+- Point 1
+- Point 2
+**Presentation potential**: [Yes/No]
 ```
-✅ Session close checklist:
+
+## 6. Output Checklist
+```
+Session close checklist:
    [x] Knowledge captured → CLAUDE.md
    [x] Decisions recorded → ADRs
    [x] Debt tracked → DEBT.md
    [x] Tasks updated → NEXT.md
+   [x] Content ideas → amk-content/articles/ideas.md
 
-🧹 Safe to /clear. Nothing valuable lost.
+Safe to /clear. Nothing valuable lost.
 ```
 
 ## Quick Mode

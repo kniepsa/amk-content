@@ -7,18 +7,140 @@ alias cc='claude --continue'
 alias cr='claude --resume'
 alias cn='claude'
 
-# Project quick-jump - opens Claude interactively
-# Run /warmup manually after entering
-resto() { cd ~/projects/restaurant-os && claude --continue; }
-salvator() { cd ~/projects/salvator-standalone && claude --continue; }
-hoettche() { cd ~/projects/em-hoettche-restaurant-standalone && claude --continue; }
-invoices() { cd ~/projects/HG-WE10/invoice-splitter && claude --continue; }
-sdk() { cd ~/projects/restaurant-os-sdk && claude --continue; }
+# ============================================
+# Golden Path Auto-Setup
+# ============================================
+# Ensures .claude/ structure exists before launching Claude
+# Runs silently if already set up - zero friction!
+ensure-golden-path() {
+  # If CLAUDE.md exists, we're good - return immediately
+  [[ -f .claude/CLAUDE.md ]] && return 0
+
+  echo "Creating golden path structure..."
+
+  # Create directories
+  mkdir -p .claude/decisions .claude/commands
+
+  # Detect project name
+  if [[ -f package.json ]]; then
+    PROJECT_NAME=$(jq -r '.name // "Unknown"' package.json 2>/dev/null || basename "$PWD")
+  else
+    PROJECT_NAME=$(basename "$PWD")
+  fi
+
+  # Generate CLAUDE.md
+  cat > .claude/CLAUDE.md <<EOF
+# $PROJECT_NAME
+
+## The Graph
+[TODO: Map data flow - User → Frontend → API → Database]
+
+## Invariants (NEVER break)
+- [TODO: Add project-specific invariants]
+- TypeScript strict mode (if applicable)
+- Environment variables for config (never hardcode)
+
+## Stack
+$(if [[ -f package.json ]]; then
+  echo "**Detected from package.json:**"
+  jq -r '.dependencies | keys[]' package.json 2>/dev/null | head -5 | sed 's/^/- /'
+else
+  echo "[TODO: List your tech stack]"
+fi)
+
+## Commands
+$(if [[ -f package.json ]]; then
+  echo "**From package.json scripts:**"
+  jq -r '.scripts | to_entries[] | "- \(.key): \(.value)"' package.json 2>/dev/null | head -5
+else
+  echo "[TODO: Add common commands]"
+fi)
+
+## Gotchas
+- [TODO: Add hard-won lessons as you discover them]
+
+## Notion
+Teamspace: NONE
+Rock ID: NONE
+EOF
+
+  # Generate NEXT.md
+  cat > .claude/NEXT.md <<'EOF'
+# Next Actions
+
+## Now
+- [ ] Set up project structure
+
+## Up Next
+- [ ]
+EOF
+
+  # Generate DEBT.md
+  cat > .claude/DEBT.md <<'EOF'
+# Technical Debt
+
+[Track issues, TODOs, and improvements here]
+EOF
+
+  echo "✓ Golden path structure created"
+  echo "💡 Edit .claude/CLAUDE.md to add invariants and gotchas"
+}
+
+# ============================================
+# Project Quick-Jump with Auto-Setup
+# ============================================
+# These shortcuts:
+# 1. cd to project
+# 2. Auto-create .claude/ if missing (zero friction!)
+# 3. Launch Claude with /warmup
+resto() {
+  cd ~/projects/restaurant-os
+  ensure-golden-path
+  claude --continue -p "/warmup"
+}
+
+salvator() {
+  cd ~/projects/salvator-standalone
+  ensure-golden-path
+  claude --continue -p "/warmup"
+}
+
+hoettche() {
+  cd ~/projects/em-hoettche-restaurant-standalone
+  ensure-golden-path
+  claude --continue -p "/warmup"
+}
+
+invoices() {
+  cd ~/projects/HG-WE10/invoice-splitter
+  ensure-golden-path
+  claude --continue -p "/warmup"
+}
+
+sdk() {
+  cd ~/projects/restaurant-os-sdk
+  ensure-golden-path
+  claude --continue -p "/warmup"
+}
 
 # Printulu project shortcuts
-printulu() { cd ~/projects/printulu/printulu-vendure && claude --continue; }
-printulu-fe() { cd ~/projects/printulu/printulu-vendure/frontend && claude --continue; }
-printulu-be() { cd ~/projects/printulu/printulu-vendure/backend && claude --continue; }
+printulu() {
+  cd ~/projects/printulu/printulu-vendure
+  ensure-golden-path
+  claude --continue -p "/warmup"
+}
+
+printulu-fe() {
+  cd ~/projects/printulu/printulu-vendure/frontend
+  ensure-golden-path
+  claude --continue -p "/warmup"
+}
+
+printulu-be() {
+  cd ~/projects/printulu/printulu-vendure/backend
+  ensure-golden-path
+  claude --continue -p "/warmup"
+}
 
 # Dev server shortcuts
 resto-dev() { cd ~/projects/restaurant-os && pnpm dev; }

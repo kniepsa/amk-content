@@ -21,7 +21,23 @@ Update `.claude/NEXT.md`:
 - Add any new tasks discovered
 - Ensure "Now" has the next priority item
 
-## 5. Content Ideas (for tech-savvy entrepreneurs)
+## 5. BMM Retrospective Trigger
+
+If `docs/sprint-status.yaml` exists:
+1. Check if current epic is complete (all stories `completed`)
+2. If epic complete → Suggest invoking SM agent for retrospective:
+   - `/bmad:bmm:agents:sm` then "Run retrospective"
+   - Captures: velocity, coverage, debt metrics
+   - Updates: project-context.md with learnings
+
+Display epic status:
+```
+🔷 BMM Epic Status: [epic-name]
+   Completed: [X/Y] stories
+   [Epic complete! Consider running retrospective]
+```
+
+## 6. Content Ideas (for tech-savvy entrepreneurs)
 Was there anything interesting that could become content?
 - Strategy sessions or pivots
 - Tool discoveries or workflow improvements
@@ -40,13 +56,14 @@ If YES → Append to `~/projects/amk-content/articles/ideas.md`:
 **Presentation potential**: [Yes/No]
 ```
 
-## 6. Output Checklist
+## 7. Output Checklist
 ```
 Session close checklist:
    [x] Knowledge captured → CLAUDE.md
    [x] Decisions recorded → ADRs
    [x] Debt tracked → DEBT.md
    [x] Tasks updated → NEXT.md
+   [x] Epic status checked → sprint-status.yaml
    [x] Content ideas → amk-content/articles/ideas.md
 
 Safe to /clear. Nothing valuable lost.
@@ -55,3 +72,17 @@ Safe to /clear. Nothing valuable lost.
 ## Quick Mode
 If session was short/trivial, just confirm:
 - "Nothing significant to capture. Safe to /clear."
+
+## TTS Momentum Marker
+
+After completing the session-end checklist, speak confirmation:
+```bash
+.claude/hooks/play-tts.sh "Session complete."
+```
+
+If epic was completed:
+```bash
+.claude/hooks/play-tts.sh "Epic complete. Great work."
+```
+
+Keep messages minimal for low verbosity mode.

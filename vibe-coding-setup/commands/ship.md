@@ -2,10 +2,47 @@
 
 Quick ship to production with one command.
 
+## Pre-Flight: UX Guardian Check (Joe Gebbia)
+
+**BEFORE any git operations**, perform UX Guardian review:
+
+1. **Scan changed files** for UI/UX changes:
+   - Look for `.tsx`, `.jsx`, `.css`, `.scss` files in the changeset
+   - Check for component changes, style changes, new UI elements
+
+2. **If UI/UX changes detected**, invoke Joe Gebbia's review:
+   ```
+   🎨 UX Guardian Review (Joe Gebbia)
+
+   Scanning changes for UX impact...
+
+   ### Technical UX Checklist
+   - [ ] Touch targets ≥44px on interactive elements
+   - [ ] Loading states for async operations
+   - [ ] Error messages guide user recovery
+   - [ ] Form labels and validation present
+   - [ ] No layout shift during load
+   ```
+
+3. **BLOCK if UX blockers found**:
+   ```
+   🛑 BLOCKED: Cannot ship with UX issues
+
+   Blocker: [specific issue with fix recommendation]
+
+   Fix the issue, then run /ship again.
+   ```
+
+4. **Proceed if passing**:
+   ```
+   ✅ UX Guardian: Passed
+   ```
+
 ## Instructions
 
 1. Check git status for changes
-2. Stage all changes: `git add .`
+2. Run UX Guardian check (see above)
+3. Stage all changes: `git add .`
 3. Create a conventional commit message based on the changes:
    - `feat:` for new features
    - `fix:` for bug fixes

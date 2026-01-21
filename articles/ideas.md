@@ -11,6 +11,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Architecture | Vibe Coding | Strategy
 **Hook**: When building packing station workflow, user said "do the design prototype first" - deferring configurability until we have 3 working examples (PACK, FOLD, LAMINATE). Avoids premature abstraction, enables UX validation, discovers actual patterns vs. imagined ones. "Rule of Three" principle from Kent Beck's patterns.
 **Key points**:
+
 - Context: Building station workflows for print production. Temptation to build generic `<StationWorkflow>` component immediately
 - Anti-pattern: Abstract too early → wrong abstraction → refactor pain. Classic example: DRY taken too far
 - "Rule of Three": Need 3 concrete examples before extracting pattern. 1 example = specific code, 2 examples = maybe coincidence, 3 examples = real pattern emerges
@@ -20,7 +21,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Real example: Packing station = 4-step workflow (weight → address → waybill → label). Will FOLD/LAMINATE follow same pattern? Don't know yet - that's why we prototype first
 - Cost comparison: 3 prototypes (9h) + extract framework (4h) = 13h total. Build framework first then adapt (20h+) due to wrong assumptions
 - When to abstract: After 3+ examples, when patterns are clear, when time saved > time invested
-**Presentation potential**: Yes (developers rush to abstract, entrepreneurs waste money on generic solutions, practical framework for knowing when to generalize)
+  **Presentation potential**: Yes (developers rush to abstract, entrepreneurs waste money on generic solutions, practical framework for knowing when to generalize)
 
 ---
 
@@ -29,6 +30,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Strategy | Life Systems | Communication
 **Hook**: Built a relationship maintenance system during intense startup work (Baustelle + 3 businesses). After breakthrough conflict resolution, created 3-tier ritual structure: Daily (10-15min Quality Time), Weekly (20min State of Union), Monthly (Date Night + Review). Framework: Gottman Method + EFT + NVC. Key insight: Treat relationship like product - rituals = automated health checks, conversation templates = error handling.
 **Key points**:
+
 - Context: 10 weeks Baustelle stress + körperliche Gewalt incident → systematic repair needed
 - Daily Ritual (10-15min @ 21:00): Phone away, "How was your day?", no stress topics. Gottman's Emotional Bank Account (5:1 ratio)
 - Weekly Ritual (20min Sunday): Appreciation (2min each) + Small issues (3min each) + Next week preview (5min) + Wishes (2min each). No major conflicts in this slot
@@ -39,7 +41,68 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Technology-assisted: WhatsApp for ritual proposals, Google Calendar for Date Nights, Video calls for Weekly when traveling
 - Measurable success criteria (4 weeks): No violence, no "Hol dir wen anderen", Putzfrau active, Daily Quality Time consistent
 - Business parallel: Rituals = monitoring, Communication templates = incident response, Weekly review = sprint retrospective
-**Presentation potential**: Yes (entrepreneurs struggle with work-life integration, systematic approach to relationships, frameworks from therapy applied as "infrastructure")
+  **Presentation potential**: Yes (entrepreneurs struggle with work-life integration, systematic approach to relationships, frameworks from therapy applied as "infrastructure")
+
+---
+
+## 2026-01-21 - Why Print Brokers Don't Need 'External' Flags: First Principles Architecture
+
+**Category**: Architecture | First Principles | Domain-Driven Design
+**Hook**: When you're 100% broker (zero in-house production), the "internal vs external" distinction is nonsense. ALL suppliers are external by definition. Industry research (JDF/JMF standard, Gelato 140+ hubs, Avanti Slingshot) reveals modern print MIS uses capability-based routing, not ownership flags. Code should mirror physical reality: Suppliers → Machines → Capabilities → Job matching.
+**Key points**:
+
+- Context: Building multi-supplier routing for Printulu (5+ external suppliers, 10% of jobs cross boundaries)
+- Anti-pattern: Tag suppliers as "is_external" boolean → Always true! Unnecessary complexity
+- First principles: What matters? Machine capabilities (press_type, max_sheet_size, finishing), not who owns them
+- Industry standard: JDF (Job Definition Format) from 1990s - attribute-based routing, not ownership-based
+- Real hierarchy: Station (workflow step) → Machine (physical equipment) → Capability (attributes)
+- Example: Job needs die_cutting → Query machines WHERE capabilities.finishing.die_cutting = true → Route to supplier who owns that machine
+- Routing algorithm: Weighted scoring (capability 30%, cost 25%, capacity 20%, quality 15%, location 10%) - research-backed from distributed manufacturing 2024
+- Gelato/Printify comparison: They route entire order to ONE hub (proximity algorithm). Doesn't work for multi-step print jobs (print here, die-cut there, pack here)
+- Progressive implementation: Start simple rules (90% coverage), layer capability matching (8%), AI optimization when data exists (2%)
+- Business impact: 97.6% on-time delivery DESPITE 5 suppliers = competitive moat is coordination, not production
+  **Presentation potential**: Yes (most founders over-complicate supplier management, applies to any broker/marketplace model, concrete example with research validation)
+
+---
+
+## 2026-01-21 - The Station vs Machine Distinction: Domain-Driven Design in Print MIS
+
+**Category**: Architecture | Domain-Driven Design | Print Industry
+**Hook**: Your code structure should mirror physical reality, not abstract concepts. In print production: Station = "what needs to happen" (workflow), Machine = "what can do it" (equipment), Capability = "specifications" (attributes). Conflating these creates routing chaos. Industry learned this in 1990s with JDF standard - modern systems (Avanti, Gelato) all follow this pattern.
+**Key points**:
+
+- Context: Designing job routing system for print broker with 5 suppliers
+- Common mistake: Station → Supplier direct mapping. Breaks when jobs cross suppliers
+- Correct hierarchy: Station (LAMINATE) → Machine (Law Print Laminator A, Renform Laminator X) → Capability (max_sheet_size, substrate_types)
+- Real-world example: Business card needs PRINT + LAMINATE + DIE_CUT. Law Print has PRINT + LAMINATE, Specialist has DIE_CUT. Job routes: Print @ Law Print → Die-cut @ Specialist → Pack @ Law Print
+- DDD principle: Ubiquitous language from domain experts. Print industry calls these "stations" (not "steps"), "machines" (not "resources"), "capabilities" (not "features")
+- Database schema reflects reality: machines table with capabilities JSONB, station_routing tracks which supplier performs each station
+- Benefits: (1) Query becomes natural ("find machines with die_cutting capability"), (2) Scales as suppliers add equipment, (3) Matches how ops team thinks
+- Anti-pattern: Generic abstraction ("ProcessingUnit" → "CapabilitySet") loses domain meaning, harder to maintain
+- Kent Beck quote: "Make the change easy, then make the easy change" - correct domain model makes routing logic obvious
+  **Presentation potential**: Yes (applies to any domain with physical processes - manufacturing, logistics, healthcare; shows how industry standards inform architecture)
+
+---
+
+## 2026-01-21 - Capability-Based Routing: How Gelato Routes 90% of Orders Locally
+
+**Category**: Architecture | Optimization | Distributed Systems
+**Hook**: Gelato operates 140+ production facilities across 32 countries. 90% of orders are produced locally (source: Printify comparison research). How? Capability-based routing algorithm: (1) Filter suppliers by required capabilities, (2) Score by weighted criteria, (3) Route to best match. Not manually assigning - automated intelligence. Pattern applies to any distributed fulfillment network.
+**Key points**:
+
+- Problem: Customer in Cape Town orders t-shirt. Which of 140 facilities should produce it?
+- Naive approach: Manual assignment → 3-6 hour delay, human error, no cost optimization
+- Industry solution: Capability-based routing with weighted scoring
+- Step 1: Filter by capabilities (does facility have DTG printer? Can handle cotton substrate? Size available?)
+- Step 2: Score remaining suppliers (capability match: 30%, cost: 25%, capacity: 20%, quality: 15%, proximity: 10%)
+- Step 3: Route to highest score (typically local facility = fastest + cheapest shipping)
+- Research validation: Distributed manufacturing optimization 2024 confirms these weights
+- Printify Choice: Similar algorithm ("selects best provider for maximum quality and profitability")
+- Avanti Slingshot: "Automated job scheduling, routing... integration enables visibility into engine availability"
+- Progressive implementation: Start with simple rules (covers 90%), add scoring for edge cases (8%), AI optimization when data exists (2%)
+- Business model fit: Works for print-on-demand (Gelato, Printify) AND complex jobs (Printulu multi-station routing)
+- Code example: `rankSuppliers(capableSuppliers, job, weights)` - 30 seconds vs 3-6 hours manual
+  **Presentation potential**: Yes (distributed systems are trendy, concrete algorithm with research backing, applies to delivery, manufacturing, service networks)
 
 ---
 
@@ -48,6 +111,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Architecture | E-commerce | Vibe Coding
 **Hook**: Building product bundles (brochures with cover + inner pages) usually means: (1) create 100+ SKU variants OR (2) complex custom product builders. We found a third way using Vendure's OrderLine custom fields that reuses 90% of existing code (2,700 lines) and adds only 300 new lines.
 **Key points**:
+
 - Problem: Brochures = cover product + inner pages product. Traditional solutions: SKU explosion (TP_BROCHURE_A5_16PG, TP_BROCHURE_A5_24PG...) OR custom product with component JSON (doesn't leverage existing products/pricing)
 - Vendure official pattern: OrderLine custom fields for product relationships (configurable products guide)
 - Architecture: 3 custom fields (bundleId UUID, bundleRole "cover"/"inner", assemblyMethod "saddle_stitch"). Two calls to addToCart() with same bundleId
@@ -57,7 +121,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Generic pattern: Works for brochures AND marketing bundles (business cards + letterheads) AND packaging sets
 - Implementation: 12-16 hours total (2h Vendure, 6-8h Shop, 4-6h Ops Hub). Zero code duplication
 - KISS approach: 10 lines added to webhook handler, 4 lines for purple badge, simple grouping logic
-**Presentation potential**: Yes (e-commerce builders face this problem, Vendure best practice example, component reuse principles, print industry assembly workflow)
+  **Presentation potential**: Yes (e-commerce builders face this problem, Vendure best practice example, component reuse principles, print industry assembly workflow)
 
 ---
 
@@ -66,6 +130,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Architecture | E-commerce | Vibe Coding
 **Hook**: Built modular shipping system that supports BEX, Courier Guy, aggregators - all via single ICourierClient interface. Adding new courier = 1 file, zero changes to existing code. Mock mode enables development without API credentials. Industry standard batch splitting (Saxoprint: 20 addresses, Flyeralarm: partial shipments).
 **Key points**:
+
 - Strategy Pattern: ICourierClient interface with 6 methods (createWaybill, getTracking, getRates, downloadLabel, cancelShipment, validateConfig)
 - Real implementations: BEXCourierClient (MVP), CourierGuyClient (future), MockCourierClient (testing)
 - Mock mode architecture: Auto-detects missing BEX_API_KEY → enables fake waybill generation for development
@@ -74,7 +139,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - MongoDB cost breakdown: Vendure stores final CSV price (print+courier), batch splitting needs to recalculate courier costs per batch while keeping print costs constant
 - Real code: TypeScript strict mode, NestJS DI, Strategy Pattern, auto-validation on startup
 - Business value: Zero-touch waybill creation (10 min → 30 sec), 83 hours/month saved ($2,490/month), easy to add more couriers
-**Presentation potential**: Yes (e-commerce architecture, Strategy Pattern in practice, mock mode for external APIs, print industry batch splitting)
+  **Presentation potential**: Yes (e-commerce architecture, Strategy Pattern in practice, mock mode for external APIs, print industry batch splitting)
 
 ---
 
@@ -83,6 +148,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Tools | Vibe Coding | Integration
 **Hook**: Integrated Notion API v5 with breaking changes from v4. Used Playwright MCP for secure API key setup (zero screenshots). Hit 4 different errors, documented each gotcha for future devs. Key insight: One-way sync (external tool = dumb sensor, journal = intelligence) avoids vendor lock-in.
 **Key points**:
+
 - Notion API v5 (2025-09-03) breaking changes: `databases` → `dataSources`, `database_id` → `data_source_id`
 - Property type gotcha: Status uses `select` type (not `status` type). Schema inspection required: `dataSources.retrieve()`
 - Permission gotcha: Must share databases via Notion UI explicitly ("Add connections"). API discovery won't grant access
@@ -92,7 +158,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Integration philosophy: One-way sync (Notion → Journal). External tool = dumb sensor, Journal = intelligence layer. Avoids conflicts, vendor lock-in
 - Sync architecture: Morning pull (Notion tasks → next.md), Evening push ([OPEN] items → Notion tasks). Manual trigger, not automatic
 - Real code: Node.js scripts with @notionhq/client v5.7.0, correct property schemas, error handling
-**Presentation potential**: Yes (API integration patterns, breaking change handling, security-first browser automation)
+  **Presentation potential**: Yes (API integration patterns, breaking change handling, security-first browser automation)
 
 ---
 
@@ -101,6 +167,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Strategy | PM | Vibe Coding
 **Hook**: Created 6,500 lines of "Ralph Wiggum-ready" specs in one session: FEATURES, ARCHITECTURE, FLOWS, TESTING, UI-DESIGN. Zero questions = Zero wasted iterations. Every decision documented with rationale, alternatives considered, and implementation code.
 **Key points**:
+
 - FEATURES.md: 30+ features with P0-P3 priorities, acceptance criteria, success metrics, edge cases, AI-first behavior
 - ARCHITECTURE.md: Complete tech stack, 10 database tables with SQL/TypeScript, API client code, cost projections ($0.93/user/month)
 - FLOWS.md: 5 major user flows with happy paths, 12+ error states, 9+ edge cases, state machine diagram
@@ -111,7 +178,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Every spec includes: Technology choice + Rationale + Alternatives considered + Implementation code + Trade-offs
 - Real code examples: WhisperClient, ClaudeExtractor, EmbeddingGenerator with full implementations
 - Business value: Onboard new developers in hours (not weeks), outsource with confidence, eliminate "what did we decide?" meetings
-**Presentation potential**: Yes (technical leadership, remote teams, AI-assisted development)
+  **Presentation potential**: Yes (technical leadership, remote teams, AI-assisted development)
 
 ---
 
@@ -120,6 +187,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Strategy | Vibe Coding | PM
 **Hook**: Created PRD so detailed "Ralph Wiggum could implement it" - every story has tasks, acceptance criteria, technical notes, UI/UX guidance, and Joe Gebbia delight moments. Zero ambiguity = Zero wasted iterations.
 **Key points**:
+
 - PRD structure: Phase 0-1 fully detailed (copy-paste ready code snippets), Phase 2-6 outlined for roadmap clarity
 - Every story includes: User Story + Tasks (numbered, actionable) + Acceptance Criteria (testable) + Technical Notes (gotchas) + UI/UX Notes (delight moments) + AI-First Pattern + Manual Fallback
 - Joe Gebbia principle: Design for "6 months later retrieval" - future you (or new dev) should understand context instantly
@@ -128,7 +196,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - GTD-style task tracking: DEV-NEXT.md with @deep-work, @coding, @testing contexts + energy level guide
 - Break-even analysis: $20/mo SaaS - $7 API costs = $13 margin → 1000 users = $13k MRR
 - Real example: Phase 0 Story 0.1.1 has 8 numbered tasks with exact commands (pnpm add, git init, etc.)
-**Presentation potential**: Yes (product management, AI-first development, remote team documentation)
+  **Presentation potential**: Yes (product management, AI-first development, remote team documentation)
 
 ---
 
@@ -137,6 +205,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Strategy | Productivity | Vibe Coding
 **Hook**: Built meeting intelligence feature twice. First version: complex automation with scripts, NLP extraction, cron jobs. User feedback: "Apply first principle thinking." Second version: Conversational interface, human-in-the-loop, <2 min capture time. Result: GTD-compliant, productivity expert approved (GTD, Cal Newport, Drucker, Campbell), zero configuration.
 **Key points**:
+
 - First Principles Applied: 1) Conversation > Configuration 2) Feedback Loop > Perfect Extraction 3) Weekly Reflection > Daily Logging 4) Action > Analysis 5) Start Manual, Automate Only What's Proven
 - User pastes Notion meeting URL → Claude reads transcript → Shows summary for confirmation → User corrects → Claude learns patterns
 - Productivity expert validation: GTD (Capture→Clarify flow), Cal Newport (batched processing), Drucker (tracks decisions not time), Campbell (personalized coaching)
@@ -146,7 +215,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Joe Gebbia delight moment: Show effectiveness emoji 🟢 9-10, 🟡 7-8, 🔴 <7 instantly
 - Real metric: >80% of meetings logged (was <20% manual), >70% decision follow-through (outcome focus)
 - Business value: Over-engineering is waste. Talk to Claude, don't run scripts. Build systems that learn from user corrections instead of pursuing perfect AI extraction.
-**Presentation potential**: Yes (productivity systems, AI UX design, first principles thinking)
+  **Presentation potential**: Yes (productivity systems, AI UX design, first principles thinking)
 
 ---
 
@@ -155,6 +224,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Tools | Vibe Coding | Productivity
 **Hook**: Built productivity integration that pulls Rize.io data and generates daily tactical + strategic coaching feedback. Zero manual work - Claude automatically analyzes your day through Campbell's (execution) and Drucker's (effectiveness) lens.
 **Key points**:
+
 - One-way sync philosophy: Rize = dumb time sensor, Journal = intelligence layer (avoids vendor lock-in)
 - MCP Server architecture: Only Claude can call MCP tools (not Node.js scripts) - use signals/exit codes to trigger
 - Rize gotcha: "Scheduled Data Redaction" deletes all app names by default - must set to "Only Retain Previous Week"
@@ -164,7 +234,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Auto-categorization potential: When app tracking works, pattern match window titles → Areas (Printulu, Bonn Gastro)
 - Live example: Drucker caught relationship avoidance on Jan 18: "Is avoiding @janika conversation more important than your Top 5?"
 - Future: Weekly trend analysis, burnout rhythm detection, strategic priority alignment checks
-**Presentation potential**: Yes (productivity tools, AI coaching, personal knowledge management, MCP integrations)
+  **Presentation potential**: Yes (productivity tools, AI coaching, personal knowledge management, MCP integrations)
 
 ---
 
@@ -173,6 +243,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Tools | Vibe Coding | Architecture
 **Hook**: Got ops feedback on RFQ feature in Week 1 by building clickable prototypes with mock data. Traditional approach would've taken 3 weeks (backend first, then UI).
 **Key points**:
+
 - UI-first development with mock data toggle (`NEXT_PUBLIC_RFQ_MOCK_MODE=true`)
 - 7 comprehensive test scenarios covering all edge cases (clear winner, tough choice, big job, expired, etc.)
 - Mock mode banner + environment variable makes it clear when testing vs production
@@ -181,13 +252,14 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Real-world ROI: Caught UX issues early (operators want "CHEAPEST" label not just price sort)
 - Component reuse: BidComparisonTable works with both mock data AND live API (same interface)
 - Enables parallel work: Designer validates UX while backend dev builds API
-**Presentation potential**: Yes (rapid prototyping, lean startups, UI/UX validation)
+  **Presentation potential**: Yes (rapid prototyping, lean startups, UI/UX validation)
 
 ## 2026-01-19 - Component Architecture for Complex Forms: Split, Validate, Coordinate
 
 **Category**: Architecture | Vibe Coding
 **Hook**: Built RFQ creation form by splitting into 4 sub-components (SupplierSelectionList, DeadlineInput, ReservePriceInput, RFQForm container). Each handles own validation, parent coordinates submission. Pattern enables isolated testing and reuse across 3 different pages.
 **Key points**:
+
 - Don't build monolithic forms - split by concern (supplier selection, deadline, price, notes)
 - Each component validates its own data (min 2 suppliers, deadline 6h-7d, price ≤ gang cost)
 - Parent RFQForm coordinates: collects validated data, handles submission, shows errors
@@ -195,7 +267,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - 62% component reuse rate (8 existing / 13 total) - only built 5 new components
 - Form sub-components easier to test in isolation (SupplierSelectionList.test.tsx validates selection logic)
 - Auto-redirect after big job creation ensures workflow completion (prevents manual steps being skipped)
-**Presentation potential**: Yes (React patterns, form architecture, component design)
+  **Presentation potential**: Yes (React patterns, form architecture, component design)
 
 ---
 
@@ -204,6 +276,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Architecture | Strategy
 **Hook**: Built AI bid ranker that considers price (40%), speed (25%), reliability (20%), capacity (15%) - not just cheapest wins. Saved R266K/year by catching "cheapest bid with 70% capacity = high delay risk" scenarios.
 **Key points**:
+
 - Multi-factor scoring beats single-metric optimization
 - Price isn't everything: R150 more expensive supplier with 2-day faster delivery wins
 - Confidence scoring: >85% auto-award, 70-85% manual review, <50% human decision
@@ -212,13 +285,14 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Gap bonus: Clear winner (>15pt score gap) increases confidence
 - Single bid penalty: Cap confidence at 60% when no competition
 - Business impact: Prevents awarding to unreliable cheap suppliers
-**Presentation potential**: Yes (marketplace builders, AI scoring, multi-objective optimization)
+  **Presentation potential**: Yes (marketplace builders, AI scoring, multi-objective optimization)
 
 ## 2026-01-19 - Component Reuse Economics: 90% Reuse = 200 LOC vs 1,000 LOC from Scratch
 
 **Category**: Architecture | Vibe Coding
 **Hook**: Built RFQ bidding system in 2 days by reusing 9/11 components from existing codebase. Writing from scratch would've taken 2 weeks.
 **Key points**:
+
 - 90% component reuse: Only 2 new components (DeadlineCountdown, BidComparisonTable) out of 11 needed
 - 200 LOC new code vs ~1,000 if built from scratch = 5x productivity multiplier
 - Design system pays off: Badge, SupplierRating, Alert already existed and worked
@@ -227,13 +301,14 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Utility functions (formatCurrency, sortBids) used across 5+ pages
 - Consistency bonus: Users already familiar with existing patterns (no training needed)
 - ROI calculation: 2 days Week 1 (validation) saves 10 days implementation (reuse 80%+)
-**Presentation potential**: Yes (design systems, component libraries, productivity hacks)
+  **Presentation potential**: Yes (design systems, component libraries, productivity hacks)
 
 ## 2026-01-19 - Validating Marketplace Patterns Before Building: A Blind Bidding Case Study
 
 **Category**: Tools | Architecture
 **Hook**: Saved 4-6 weeks by researching DOJ anti-collusion practices before implementing custom auction system
 **Key points**:
+
 - Web search validation (Serper MCP) vs building blind
 - Government procurement standards apply to B2B marketplaces
 - Blind auction variation for small supplier markets (SA printing)
@@ -241,13 +316,14 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - DOJ Procurement Collusion Strike Force best practices
 - Reserve price strategy validated with participation caveat
 - Industry-standard sealed bid processes adapted for privacy
-**Presentation potential**: Yes (marketplace builders, anti-collusion mechanisms, procurement systems)
+  **Presentation potential**: Yes (marketplace builders, anti-collusion mechanisms, procurement systems)
 
 ## 2026-01-19 - Progressive Cost Reduction: Manual Override → Automated Bidding
 
 **Category**: Strategy | GTM
 **Hook**: R266K annual savings from 1.5-hour implementation (Phase 1) before investing 4-6 weeks in automation (Phase 2)
 **Key points**:
+
 - KISS: Ship manual first, validate demand, then automate
 - Big job threshold triggers (R75K in printing = always negotiable)
 - Audit trail for manual overrides (reason required)
@@ -255,13 +331,14 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Decision criteria: >R50K savings in 3 months → justify Phase 2
 - Print industry reality: Small jobs use standard rates, big jobs always negotiate
 - Incremental savings: R100K/year manual → R250K/year automated
-**Presentation potential**: Yes (lean startups, progressive enhancement, ROI-driven development)
+  **Presentation potential**: Yes (lean startups, progressive enhancement, ROI-driven development)
 
 ## 2026-01-19 - Setting Up MCP Servers in Claude Code: The `.mcp.json` Gotcha
 
 **Category**: Tools | Vibe Coding
 **Hook**: You think MCP servers go in `settings.json`? Wrong. That's 30 minutes of debugging you'll never get back.
 **Key points**:
+
 - Common misconception: `mcpServers` field in `~/.claude/settings.json` (fails with "Unrecognized field" error)
 - Reality: Claude Code uses `.mcp.json` per-project, NOT settings.json (which is permissions-only)
 - Two setup methods: CLI wizard (`claude mcp add`) or manual `.mcp.json` creation
@@ -269,9 +346,9 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Test mode gotcha: Tokens expire after 7 days until app published - must re-authenticate weekly
 - Project-specific advantage: Each project can have different MCP servers (great for client work)
 - Available tools: Google Calendar (list_events, create_event, find_free_time) enables voice-to-calendar workflows
-**Real-world impact**:
+  **Real-world impact**:
 - Enables Phase 4 of voice-first journal: Auto-import calendar meetings → daily entries
-**Presentation potential**: Yes (Claude Code setup, MCP servers, productivity tools)
+  **Presentation potential**: Yes (Claude Code setup, MCP servers, productivity tools)
 
 ---
 
@@ -287,6 +364,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Workflow | Developer Experience | Vibe Coding
 **Hook**: Building database-first wastes 60-70% of time on UX that gets rejected. Mock mode flips this: Ship clickable prototypes in 2 hours, get feedback, THEN wire database. How we built RFQ flows with NEXT_PUBLIC_MOCK_MODE toggle.
 **Key points**:
+
 - NEXT_PUBLIC_RFQ_MOCK_MODE toggle enables instant UX testing without backend
 - 7 comprehensive test scenarios cover all edge cases (clear winner, tough choice, big job, expired, awarded, draft, declined)
 - Mock data structure matches real database schema - easy to swap implementations
@@ -294,8 +372,8 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Real ROI: Caught "operators need CHEAPEST label" issue in Week 1, not Week 3 after backend built
 - Component reuse: Same BidComparisonTable works with mock data AND live API (interface compatibility)
 - Parallel work enabler: Designer validates flows while backend dev builds schema
-**Business Value**: Faster iteration cycles (80% faster vs database-first), early stakeholder feedback, reduced rework costs, enables parallel development
-**Presentation potential**: Yes (rapid prototyping, lean startup methodology, UI-first development)
+  **Business Value**: Faster iteration cycles (80% faster vs database-first), early stakeholder feedback, reduced rework costs, enables parallel development
+  **Presentation potential**: Yes (rapid prototyping, lean startup methodology, UI-first development)
 
 ---
 
@@ -304,6 +382,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Code Quality | Architecture | Vibe Coding
 **Hook**: Before writing ANY new component, ask: "Does this exist already?" We saved 800 LOC by discovering 9/11 RFQ components already in codebase (StatusBadge, DataTable, SupplierCard). The 5-minute audit that prevents days of duplicate work.
 **Key points**:
+
 - Component reuse discovery pattern: Search codebase FIRST before designing UI
 - Real example: 9/11 RFQ components existed (Badge, StatusBadge, Alert, Input, Button, Card, DataTable, SupplierRating, DeadlineAlert)
 - Only 2 truly new components needed (DeadlineCountdown, BidComparisonTable) = 200 LOC
@@ -312,8 +391,8 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Design system ROI: Investment in shared-ui package pays dividends on every feature
 - Consistency bonus: Users already familiar with existing patterns (zero training needed)
 - Discovery tools: Glob for component files, Grep for similar patterns, Read to verify functionality
-**Business Value**: Faster feature delivery, consistent UX across apps, lower maintenance costs (fix once, applies everywhere)
-**Presentation potential**: Yes (design systems, productivity hacks, component library strategy)
+  **Business Value**: Faster feature delivery, consistent UX across apps, lower maintenance costs (fix once, applies everywhere)
+  **Presentation potential**: Yes (design systems, productivity hacks, component library strategy)
 
 ---
 
@@ -322,6 +401,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Accessibility | UX | Vibe Coding
 **Hook**: Custom dropdowns take 200 lines of JS + accessibility testing. Native `<details>/<summary>` takes 10 lines and gets keyboard nav + screen reader support free. Why semantic HTML beats custom widgets.
 **Key points**:
+
 - Semantic HTML (details/summary, fieldset/legend) provides WCAG AA compliance free
 - ARIA labels pattern: role="tablist", aria-selected, aria-controls for custom components
 - Keyboard navigation: focus:ring-2 indicators, Tab/Enter/Space work throughout
@@ -330,8 +410,8 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Touch targets: ≥44px for mobile (prevent accidental taps)
 - Real example: RFQ list page - 100% keyboard navigable, VoiceOver tested, Lighthouse accessibility: 100
 - Cost savings: Building accessibility-first vs retrofitting later = 5 minutes vs 2 hours
-**Business Value**: Legal compliance (avoid ADA lawsuits), broader user reach (15% population has disabilities), lower testing costs (caught early not late)
-**Presentation potential**: Yes (accessibility strategy, legal compliance, inclusive design)
+  **Business Value**: Legal compliance (avoid ADA lawsuits), broader user reach (15% population has disabilities), lower testing costs (caught early not late)
+  **Presentation potential**: Yes (accessibility strategy, legal compliance, inclusive design)
 
 ---
 
@@ -340,6 +420,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: Product Development | Agile | Vibe Coding
 **Hook**: Most features fail because of bad assumptions, not bad code. The 3-step validation: (1) Business logic check (does this solve real problem?), (2) UX principles (is it accessible/usable?), (3) Component audit (can we reuse 80%?). Prevents 50-70% rework.
 **Key points**:
+
 - Step 1: Business logic validation - Validate supplier flow AND ops flow before coding
 - Step 2: UX principles - Joe Gebbia's 7 criteria (speed, anticipation, friction removal, visual hierarchy, KISS, accessibility, delight)
 - Step 3: Component audit - Search existing codebase for reusable parts (target 80%+ reuse)
@@ -347,8 +428,8 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Print expert validation: Broker model constraints (no inventory, no equipment) shaped UI decisions
 - Industry research: DOJ anti-collusion practices validated blind bidding approach
 - Validation ROI: 2 hours Day 0 (research + validation) saves 20 hours Week 3 (rework avoided)
-**Business Value**: Reduced feature abandonment (build right thing first time), higher user satisfaction (validated UX), lower development costs (50-70% less rework)
-**Presentation potential**: Yes (product management, lean development, validation frameworks)
+  **Business Value**: Reduced feature abandonment (build right thing first time), higher user satisfaction (validated UX), lower development costs (50-70% less rework)
+  **Presentation potential**: Yes (product management, lean development, validation frameworks)
 
 ---
 
@@ -357,6 +438,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Category**: DevOps | Tooling | Vibe Coding
 **Hook**: Build worked locally, failed in CI. The culprit? `"workspace:*"` protocol works in pnpm but breaks npm. The 5 monorepo gotchas that waste hours (composite mode, Tailwind config in shared packages, circular deps).
 **Key points**:
+
 - Gotcha #1: `"workspace:*"` is pnpm-only - use `"*"` for npm compatibility
 - Gotcha #2: TypeScript composite mode required for project references (`"composite": true` in tsconfig.json)
 - Gotcha #3: Tailwind config in shared packages breaks consuming apps - use tailwind-variants instead
@@ -365,8 +447,8 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 - Real example: formatCurrency duplication in 3 places caused build errors - consolidated to shared-utils
 - npm workspace pattern: Keep dependencies flat, avoid protocol syntax, explicit builds
 - Verification: Test in CI environment (not just local) to catch npm vs pnpm differences
-**Business Value**: Faster CI/CD (fewer broken builds), smoother developer onboarding (consistent tooling), predictable deployments
-**Presentation potential**: Yes (monorepo architecture, CI/CD optimization, tooling strategy)
+  **Business Value**: Faster CI/CD (fewer broken builds), smoother developer onboarding (consistent tooling), predictable deployments
+  **Presentation potential**: Yes (monorepo architecture, CI/CD optimization, tooling strategy)
 
 ---
 
@@ -376,6 +458,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Hook**: Railway deployment stuck in "BUILDING" for over an hour, production server running week-old code. Here's how to diagnose and force a fresh deployment when the platform gets stuck.
 
 **Key points**:
+
 - Problem: Railway deployment stuck in "BUILDING" status with "deploymentStopped": true
 - Active deployment remained on old commit (Jan 16) despite multiple push attempts
 - Railway CLI `status --json` reveals deployment metadata (commit hash, status, timestamps)
@@ -395,6 +478,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Hook**: 376 lines of duplicate code across 3 apps, but zero budget for breaking changes. Here's how we consolidated to shared packages while maintaining 100% backward compatibility.
 
 **Key points**:
+
 - Problem: Shop had ZERO shared package imports despite packages existing for 6 days (Jan 13-19)
 - Challenge: API mismatches - shared-utils returns `{isValid, error}`, shop expects `{field, message}`
 - Solution: Adapter layer bridges APIs without rewriting 23+ call sites
@@ -414,6 +498,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Hook**: How do you design software for low-literacy factory workers wearing gloves? The lessons from Printulu's operator terminal apply to any product serving non-technical users.
 
 **Key points**:
+
 - **KISS principle execution**: ONE BIG BUTTON per screen (88px+ height) - no multi-step forms, no voice commands (accent barriers)
 - **Progressive disclosure mastery**: Pro Mode hidden in tiny gray text (90% never see it), Simple Mode is default
 - **Touch-first design**: All buttons exceed WCAG 2.1 AA by 2x (88px vs 44px minimum) - perfect for gloves
@@ -428,7 +513,6 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 
 **Gotcha worth sharing**: StationMessaging component exists but is unused - shows importance of integration checks in UX reviews. Code quality doesn't matter if features aren't wired up.
 
-
 ---
 
 ## 2026-01-20 - Debugging Vendure Migrations That Claim They Ran But Didn't
@@ -437,6 +521,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Hook**: TypeORM says "no pending migrations" but your database columns don't exist. Here's how to debug migration phantom execution in production.
 
 **Key points**:
+
 - Problem: Migration marked as "run" in `migrations` table but SQL never executed - columns missing
 - Symptom: TypeORM `runMigrations()` returns "no pending migrations" but ALTER TABLE statements never ran
 - Root cause: Migration entry added to table but SQL execution failed silently or was interrupted
@@ -457,6 +542,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Hook**: Your 392-dependency project won't deploy. You've spent 3 hours debugging. Should you keep debugging or start over?
 
 **Key points**:
+
 - Dependency bloat is insidious: Databutton/template projects include 300+ unused packages (blockchain, 3D graphics, video chat)
 - Yarn Berry PnP fails silently on Vercel despite working locally
 - "Nuclear Clean" approach: Fresh Vite project, copy only essential code, 40 dependencies
@@ -478,6 +564,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Hook**: Need FileProof validation in your ops dashboard. Do you deploy a separate frontend or integrate the API directly?
 
 **Key points**:
+
 - Option 1: Standalone frontend (2-3 hours, separate deployment, maintenance burden)
 - Option 3: Backend-only integration (30 min, zero deployment risk, seamless UX)
 - Case study: FileProof.ai had both - started with backend-only for MVP, added standalone later
@@ -499,6 +586,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Hook**: Your project builds locally but fails on Vercel. Why? Yarn Berry's PnP mode is incompatible with Vercel's npm-based builds.
 
 **Key points**:
+
 - Yarn Berry Plug'n'Play (PnP) mode: Zero node_modules, fast installs, works great locally
 - Vercel uses npm/pnpm internally - doesn't understand .pnp.cjs artifacts (532KB file)
 - Symptoms: "Pattern trying to unpack in same destination", esbuild conflicts, missing patches
@@ -519,6 +607,7 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 **Hook**: Your project has 392 dependencies but uses 40. How did you get here? And how do you fix it?
 
 **Key points**:
+
 - Template projects (Databutton, create-react-app variants) include kitchen-sink dependencies
 - Import analysis reveals truth: lucide-react (49 imports), sonner (54 imports), THREE.js (0 imports)
 - 90% of dependencies are for features you'll never build (blockchain, 3D, video chat, AI voice)
@@ -532,3 +621,48 @@ Target audience: Tech-savvy entrepreneurs who want to ship faster with AI.
 
 **Business value**: Technical debt starts before you write line one. Choose lightweight templates. Every dependency is a maintenance commitment.
 
+---
+
+## 2026-01-21 - Emergency Deployment Tactics: TypeScript vs Time to Production
+
+**Category**: Tools, Strategy
+**Hook**: Your ops dashboard won't deploy. 150 TypeScript errors. Webhook endpoint needed live in 30 minutes. Do you fix types or ship with warnings?
+
+**Key points**:
+
+- TypeScript strict mode is great UNTIL it blocks production deployments
+- Real scenario: ops-hub webhook endpoint needed for Vendure integration, cascading type errors from reduce() callbacks
+- Emergency tactic: `next.config.ts: { typescript: { ignoreBuildErrors: true } }` enables deployment with non-critical type errors
+- Triage pattern: Fix blocker errors (missing types, wrong imports), defer inference errors to post-deploy
+- Risk assessment: Type errors in non-production code paths (suggestions page, optimizer utilities) vs critical paths (webhook handler, auth)
+- Result: Webhook live in 30 min, 3 remaining type errors fixed in next sprint
+- When NOT to use: New projects (fix types first), customer-facing features (UI bugs from type mismatches), data mutations (silent failures)
+- Lesson: "Perfect is the enemy of shipped" - sometimes technical debt is the right business decision
+- Follow-up: Created GitHub issue linking to specific errors, assigned to next sprint with proper time allocation
+
+**Presentation potential**: Yes - live demo of deployment triage decision tree
+
+**Business value**: Entrepreneurs face "ship vs polish" dilemmas daily. Time to value beats perfect code when customer is waiting. Framework for when to accumulate technical debt strategically.
+
+---
+
+## 2026-01-21 - Monorepo Deployment: When Shared Packages Block Production
+
+**Category**: Architecture, Tools
+**Hook**: Your shared-ui package works perfectly locally. Vercel deployment fails: "Module not found @printulu/shared-ui". Why?
+
+**Key points**:
+
+- Monorepo structure: Parent directory with packages/ not accessible in Vercel deployments
+- Vercel builds ONLY deploy single subdirectory (ops-hub/), can't access ../packages/
+- Two solutions: (1) Complex Vercel monorepo build config with workspace dependencies, (2) Copy components locally (150 LOC duplication)
+- KISS principle: Copied 2 components (GangProductionSpecs.tsx, GangProsConsSection.tsx) instead of 2 hours debugging build config
+- When to choose local copy: <3 components, <200 LOC, urgent deployment
+- When to choose monorepo config: >5 components, frequently changing shared code, long-term project
+- Real metrics: 30 min local copy vs 2-3 hours Vercel build config + future maintenance
+- Pattern: Monorepo benefits (code reuse, version sync) only matter AFTER components stabilize
+- Alternative: Publish shared packages to npm (public/private registry) - most robust but adds publish step
+
+**Presentation potential**: Yes - architecture decision framework for shared code
+
+**Business value**: Premature abstraction kills velocity. Copy-paste is sometimes the right answer for MVP. Optimize for ship speed, not theoretical purity.

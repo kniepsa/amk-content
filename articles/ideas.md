@@ -1,5 +1,25 @@
 # Content Ideas
 
+## 2026-02-25 - Claude Code February 2026: The Features That Actually Matter
+
+**Category**: Vibe Coding | Tools
+**Hook**: Claude Code shipped 5 features in February 2026 that most developers don't know exist. Worktrees are now a native flag. Docker Sandboxes give Claude a real sandbox. LSP gives Claude IDE-level code intelligence. Here's what changed and why it matters.
+
+**Key points**:
+
+- `claude --worktree` native flag (v2.1.49) — no more manual git worktree + alias setup
+- Subagents can declare `isolation: "worktree"` for sandboxed parallel execution
+- Docker Sandboxes (Docker Desktop 4.50) — isolated container with workspace mounted at same absolute path, prevents destructive ops
+- LSP tool — Claude can now do go-to-definition, find references, hover documentation (IDE-grade code intelligence)
+- `background: true` for agents — long-running agent with Ctrl+F control while you focus on other work
+- Startup 500ms faster via deferred hook execution
+- `/model` now shows human-readable labels (Sonnet 4.5 instead of claude-sonnet-4-5-20241022)
+- `SDKRateLimitInfo` — real-time throttling visibility for programmatic integrations
+
+**Presentation potential**: YES — Immediately actionable for any vibe coder, great "what's new" format
+
+---
+
 ## 2026-02-25 - Intelligent B2B Reseller Detection: Keywords + Enrichment Hybrid
 
 **Category**: Architecture | Data Engineering | Growth
@@ -1576,9 +1596,10 @@
 **Category**: Vibe Coding
 **Hook**: What if you could run 6 engineers in parallel on a migration sprint and verify everything before shipping — in a single session?
 **Key points**:
+
 - Spawned 6 parallel builder agents (resend-builder, loops-builder, reoon-builder, cleanup-builder, docs-builder, dedup-builder)
 - Each agent handled one atomic task: migrate, rewrite, delete, document
 - Validation agent (#14) ran concurrently against Resend API docs
 - Result: 53 files changed, 4,119 insertions, 5,480 deletions in one session
 - Pattern: Atomic task decomposition → parallel spawn → validation layer → integration test → ship
-**Presentation potential**: YES — concrete numbers + workflow diagram + before/after code quality
+  **Presentation potential**: YES — concrete numbers + workflow diagram + before/after code quality

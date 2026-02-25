@@ -1,5 +1,23 @@
 # Content Ideas
 
+## 2026-02-25 - The Vibe Coder's Terminal Setup (Claude Code Status Line + Terminal Choice)
+
+**Category**: Vibe Coding | Tools
+**Hook**: The bottom bar in Claude Code is a fully programmable shell script. Most people leave it blank. Here's what the community puts in it — and the terminal + prompt stack that makes it all work.
+
+**Key points**:
+
+- Status line receives JSON: model, context %, actual cost, git branch, session duration, project dir
+- Community favorites: project name | model | ctx% bar | $cost | duration | branch
+- Warp = best for teams + Oz cloud orchestration (Feb 10 2026); Ghostty = fastest but /terminal-setup incompatible
+- Starship beats oh-my-zsh: 120ms vs 640ms shell startup
+- Two-layer awareness: shell prompt (Starship) for repo/language context + statusline for session metrics
+- ccstatusline npm package, oh-my-claude, claude-powerline for pre-built themes
+
+**Presentation potential**: YES — Visual demo of customized terminal is compelling for any vibe coder
+
+---
+
 ## 2026-02-25 - Claude Code February 2026: The Features That Actually Matter
 
 **Category**: Vibe Coding | Tools
@@ -36,6 +54,23 @@
 - Result: 3,185 RESELLER_KEYWORD vs 649 frequency-based RESELLER tags
 
 **Presentation potential**: YES - Applicable to any B2B business doing customer segmentation
+
+---
+
+## 2026-02-25 - The `/learn` Pattern: Making Every Debugging Session Pay Forward
+
+**Category**: Vibe Coding | Tools
+**Hook**: Every time you solve a hard bug, you're holding institutional knowledge that will evaporate the moment you close the session. Here's the one habit compound engineers use to make future features progressively easier — and how to build it into your Claude Code setup.
+
+**Key points**:
+
+- Compound Engineering (Every.to) philosophy: 80% planning/review, 20% execution — each solved problem creates reusable knowledge
+- The difference between recording a fix ("the solution was X") vs a reusable pattern ("When X, always Y because Z")
+- Three-layer memory model: CLAUDE.md Gotchas (one-liner quick ref) → learnings.md (full context + why) → MEMORY.md (cross-project meta)
+- Persona-based specialist agents (nextjs-reviewer) catch stack-specific bugs that generalist reviewers miss
+- Why compound engineering doesn't replace vibe coding — it complements it: session-flow, hooks, and layer context are better; pattern capture and specialist reviewers are better from compound
+
+**Presentation potential**: YES — The "compound" mental model is compelling for any developer who has re-solved the same problem twice
 
 ---
 

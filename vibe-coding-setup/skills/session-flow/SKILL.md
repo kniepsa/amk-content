@@ -129,6 +129,7 @@ During WORK:
 - If bugs encountered, suggest the `/debug` command
 - If scope unclear, suggest the `/analyst` command
 - If design unclear, suggest the `/architect` command
+- If something non-trivial was just solved, suggest the `learn` skill to capture the pattern now while it's fresh
 
 **Notion Reminder**: Every 15-20 minutes of active work, gently remind:
 

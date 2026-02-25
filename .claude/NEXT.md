@@ -15,6 +15,10 @@ _No active task. Run /warmup to start._
 
 ## Done
 
+- [x] 2026-02-25: Built `/learn` skill + `nextjs-reviewer` agent (compound engineering cherry-picks)
+- [x] 2026-02-25: Built statusline.sh (project | model | ctx% | cost | duration | branch)
+- [x] 2026-02-25: Fixed statusline bugs (model.display_name, cost.total_cost_usd direct)
+- [x] 2026-02-25: Deployed statusline to ~/.claude/hooks/ + all 3 registered projects
 - [x] 2026-02-25: Shipped vibe-coding-setup V3 (98 files, commit 6af0427)
 - [x] 2026-02-25: Fixed last30days skill (WebSearch instead of context7)
 - [x] 2026-02-25: Fixed researcher agent model (haiku-3-5, not opus)

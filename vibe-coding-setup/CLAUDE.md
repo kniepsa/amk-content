@@ -33,6 +33,8 @@ User Need → TypeScript/Next.js → Service Layer → Supabase RLS → Vercel D
 - `.claudeignore` → add node_modules, .next, dist, build → 40%+ token savings on large repos
 - Two-Correction Rule: if you've corrected Claude twice on the same issue, `/clear` and rewrite the prompt
 - Interview Pattern: for complex features, have Claude interview you first → FRESH session to implement
+- **Supabase: `getSession()` trusts client JWT — use `getUser()` to validate server-side** (security: getSession can be spoofed)
+- **Next.js: `redirect()` throws internally** — wrapping in try/catch catches the throw and suppresses the redirect (it never fires)
 
 ## API Error Handling
 

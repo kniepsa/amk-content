@@ -93,6 +93,10 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/hooks/statusline.sh"
+  },
   "enabledPlugins": {
     "ralph-wiggum@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,

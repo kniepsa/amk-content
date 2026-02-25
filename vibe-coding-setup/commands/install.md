@@ -98,7 +98,12 @@ See: ~/Projects/amk-content/brand-guides/[business].md
 ### 3. Copy Quality Templates
 
 - Copy hooks from `~/Projects/amk-content/vibe-coding-setup/templates/.claude/hooks/`
-- Copy `.claude/settings.json` template (with all V3 hooks)
+- Copy `.claude/settings.json` template (with all V3 hooks + status line)
+- Ensure `~/.claude/hooks/statusline.sh` is present and executable:
+  ```bash
+  [ -f ~/.claude/hooks/statusline.sh ] || cp ~/Projects/amk-content/vibe-coding-setup/hooks/statusline.sh ~/.claude/hooks/statusline.sh
+  chmod +x ~/.claude/hooks/statusline.sh
+  ```
 - Set up Husky + lint-staged if not already configured
 
 ### 3.5 Register & Version Stamp

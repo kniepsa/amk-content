@@ -169,7 +169,7 @@ builder, researcher, reviewer
 
 ### Hooks (`hooks/*.sh`)
 
-damage-control, notion-reminder (progress check), session-start
+damage-control, notion-reminder (progress check), session-start, statusline
 
 ### Templates (`templates/.claude/`)
 

@@ -5,18 +5,23 @@ Activate systematic debugging for the current issue.
 ## The 8 Steps
 
 ### Step 1: Reproduce
+
 Before anything else:
+
 - [ ] Can you reproduce the issue consistently?
 - [ ] What are the exact steps to trigger it?
 - [ ] What's expected vs actual behavior?
 
 ### Step 2: Isolate
+
 Narrow down the problem:
+
 - [ ] Which component/file is responsible?
 - [ ] Can you create a minimal reproduction?
 - [ ] Does it happen in isolation or only in context?
 
 ### Step 3: Gather Evidence
+
 ```
 Error location: [file:line]
 Error message: [exact error]
@@ -25,30 +30,39 @@ Last working state: [commit/change that broke it]
 ```
 
 ### Step 4: Form Hypotheses
+
 Rank by likelihood:
-1. Most likely cause: ___
-2. Second possibility: ___
-3. Edge case to consider: ___
+
+1. Most likely cause: \_\_\_
+2. Second possibility: \_\_\_
+3. Edge case to consider: \_\_\_
 
 ### Step 5: Test Hypotheses
+
 For each hypothesis:
+
 - Add logging/breakpoints to confirm or eliminate
 - Binary search: "When did this last work?"
 - Check assumptions: "What are we assuming that might be wrong?"
 
 ### Step 6: Trace Data Flow
+
 Follow the data from input to error:
+
 - Where does it enter the system?
 - What transformations happen?
 - Where does it diverge from expected?
 
 ### Step 7: Fix & Validate
+
 Before marking resolved:
+
 - [ ] Root cause identified (not just symptoms)
 - [ ] Fix doesn't break other functionality
 - [ ] Added test/guard to prevent recurrence
 
 ### Step 8: Document
+
 - [ ] Add gotcha to CLAUDE.md if non-obvious
 - [ ] Update DEBT.md if technical debt created
 - [ ] Consider ADR if architectural insight gained
@@ -58,6 +72,7 @@ Before marking resolved:
 ## Quick Checklists
 
 ### Frontend Issues
+
 - [ ] Browser console errors?
 - [ ] Network tab - API responses correct?
 - [ ] React DevTools - component state?
@@ -65,6 +80,7 @@ Before marking resolved:
 - [ ] Check `revalidatePath()` for caching issues
 
 ### Backend Issues
+
 - [ ] Server logs showing errors?
 - [ ] Database queries returning expected data?
 - [ ] Auth/permissions blocking access?
@@ -72,6 +88,7 @@ Before marking resolved:
 - [ ] Supabase: Check `.error` before `.data`
 
 ### Build Issues
+
 - [ ] TypeScript errors in output?
 - [ ] Missing dependencies in package.json?
 - [ ] Circular imports detected?

@@ -5,6 +5,7 @@ This folder contains **strategic** architecture decisions - only the BIG ones th
 ## What Goes Here?
 
 ✅ **YES - Strategic Decisions:**
+
 - Database choice (Supabase vs Firebase vs custom)
 - Framework choice (Next.js vs Remix)
 - Major architecture changes (monolith → microservices)
@@ -12,6 +13,7 @@ This folder contains **strategic** architecture decisions - only the BIG ones th
 - Deployment platform
 
 ❌ **NO - Tactical Decisions:**
+
 - Component structure
 - File naming conventions
 - Linting rules

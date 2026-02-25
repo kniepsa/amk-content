@@ -3,32 +3,37 @@
 For Gamma presentations and marketing materials.
 
 ## Inspiration
+
 Based on [Resend.com](https://resend.com) - modern, developer-focused aesthetic.
 
 ## Color Palette
 
 ### Primary Colors
-| Name | Hex | Usage |
-|------|-----|-------|
-| Deep Black | `#000000` | Primary background |
-| Pure White | `#FFFFFF` | Primary text, contrast |
-| Electric Blue | `#00A3FF` | CTAs, links, accents |
+
+| Name          | Hex       | Usage                  |
+| ------------- | --------- | ---------------------- |
+| Deep Black    | `#000000` | Primary background     |
+| Pure White    | `#FFFFFF` | Primary text, contrast |
+| Electric Blue | `#00A3FF` | CTAs, links, accents   |
 
 ### Secondary Colors
-| Name | Hex | Usage |
-|------|-----|-------|
-| Slate Dark | `#1a1a1a` | Cards, elevated surfaces |
-| Slate Medium | `#2d2d2d` | Borders, dividers |
-| Slate Light | `#404040` | Muted text, icons |
+
+| Name         | Hex       | Usage                    |
+| ------------ | --------- | ------------------------ |
+| Slate Dark   | `#1a1a1a` | Cards, elevated surfaces |
+| Slate Medium | `#2d2d2d` | Borders, dividers        |
+| Slate Light  | `#404040` | Muted text, icons        |
 
 ## Typography
 
 ### Font Stack
+
 - **Headlines**: Inter Bold (or system sans-serif bold)
 - **Body**: Inter Regular
 - **Code/Data**: JetBrains Mono or Consolas
 
 ### Font Sizes (Gamma)
+
 - Title: 48-64px
 - Headline: 32-40px
 - Subhead: 24px
@@ -38,6 +43,7 @@ Based on [Resend.com](https://resend.com) - modern, developer-focused aesthetic.
 ## Visual Style
 
 ### Aesthetic
+
 - **Dark mode first** - black backgrounds
 - **High contrast** - white text on black
 - **Minimalist** - lots of whitespace
@@ -45,18 +51,21 @@ Based on [Resend.com](https://resend.com) - modern, developer-focused aesthetic.
 - **Professional** - investment/finance credibility
 
 ### Design Elements
+
 - Subtle gradients on buttons
 - Frosted glass effects for cards
 - Rounded corners (8-16px)
 - Generous padding (24-48px)
 
 ### Do's
+
 - Use plenty of negative space
 - Keep slides simple (one idea per slide)
 - Use blue sparingly for emphasis
 - Include data visualizations
 
 ### Don'ts
+
 - No busy backgrounds
 - No bright colors beyond blue accent
 - No decorative elements
@@ -65,6 +74,7 @@ Based on [Resend.com](https://resend.com) - modern, developer-focused aesthetic.
 ## Presentation Structure
 
 ### Recommended Slide Types
+
 1. Title (black bg, white text, centered)
 2. Statement (single bold sentence)
 3. Data/Chart (minimal axis labels)

@@ -16,9 +16,11 @@ What did we decide to do?
 What are the trade-offs?
 
 **Positive:**
+
 - What we gain
 
 **Negative:**
+
 - What we lose or must accept
 
 ## Alternatives Considered

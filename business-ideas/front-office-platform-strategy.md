@@ -6,6 +6,7 @@
 ## Vision
 
 Build a **scalable platform product** (CMS + Growth Engine + AI Content) that:
+
 1. **Validates** with own brands (restaurants, Printulu, invoice-splitter)
 2. **Proves revenue** with paying clients (Handwerker, Statiker)
 3. **Scales** to many external customers in German local business market
@@ -16,14 +17,14 @@ Build a **scalable platform product** (CMS + Growth Engine + AI Content) that:
 
 ## Platform Customers
 
-| Customer | Type | Role | Timeline |
-|----------|------|------|----------|
-| **Handwerker Client** | Service business | First paying customer | Week 1-2 |
-| **Statiker Client** | Service business | Second paying customer | Week 3 |
-| Salvator | Restaurant | Validation (own) | Active |
-| Em Höttche | Restaurant | Validation (own) | Active |
-| Printulu | E-commerce | Validation (own) | Parallel |
-| Future customers | Various | Scale target | Month 2+ |
+| Customer              | Type             | Role                   | Timeline |
+| --------------------- | ---------------- | ---------------------- | -------- |
+| **Handwerker Client** | Service business | First paying customer  | Week 1-2 |
+| **Statiker Client**   | Service business | Second paying customer | Week 3   |
+| Salvator              | Restaurant       | Validation (own)       | Active   |
+| Em Höttche            | Restaurant       | Validation (own)       | Active   |
+| Printulu              | E-commerce       | Validation (own)       | Parallel |
+| Future customers      | Various          | Scale target           | Month 2+ |
 
 **Architecture**: Multi-tenant platform with separate frontend repos per customer.
 
@@ -33,12 +34,12 @@ Build a **scalable platform product** (CMS + Growth Engine + AI Content) that:
 
 Based on deep market research:
 
-| Competitor | Size | Gap We Fill |
-|------------|------|-------------|
-| DISH Metro | $15-29M, 182 employees | No AI content, restaurant-only |
-| Jimdo | €65M, 250 employees | Generic, no vertical focus |
-| Goldfein/MEISTER1 | Small agencies | Manual work, no platform |
-| Wix/GoHighLevel | $83M-$1.7B | Not German-focused, complex |
+| Competitor        | Size                   | Gap We Fill                    |
+| ----------------- | ---------------------- | ------------------------------ |
+| DISH Metro        | $15-29M, 182 employees | No AI content, restaurant-only |
+| Jimdo             | €65M, 250 employees    | Generic, no vertical focus     |
+| Goldfein/MEISTER1 | Small agencies         | Manual work, no platform       |
+| Wix/GoHighLevel   | $83M-$1.7B             | Not German-focused, complex    |
 
 **Our edge**: AI content generation + German market focus + multi-vertical platform
 
@@ -145,12 +146,14 @@ handwerker-client/
 ### Week 3: Statiker Website
 
 **Reuse from Handwerker:**
+
 - Same architecture, different branding
 - Portfolio system for structural engineering projects
 - Lead capture for quote requests
 - Services adapted for Statiker context
 
 **Statiker-specific:**
+
 - Project case studies (extended portfolio)
 - Certifications/qualifications section
 - Technical service descriptions
@@ -160,6 +163,7 @@ handwerker-client/
 ## Phase 2: Printulu Integration (Parallel)
 
 **Scope clarified:**
+
 - Keep Vendure for e-commerce shop
 - Migrate blog to Restaurant OS CMS
 - Potential Vendure SDK integration for unified admin
@@ -196,19 +200,20 @@ ALTER TABLE restaurants ADD COLUMN business_type TEXT DEFAULT 'restaurant';
 
 **Type-specific features:**
 
-| Feature | Restaurant | Handwerker | Statiker | E-commerce | SaaS |
-|---------|------------|------------|----------|------------|------|
-| Menu/Services | ✅ Menu | ✅ Services | ✅ Services | ✅ Categories | ❌ |
-| Events | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Portfolio | ❌ | ✅ | ✅ | ✅ Showcase | ❌ |
-| Leads | ❌ | ✅ | ✅ | ❌ | ✅ |
-| Blog | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Reservations | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Pricing | ✅ | Optional | ❌ | Vendure | ❌ |
+| Feature       | Restaurant | Handwerker  | Statiker    | E-commerce    | SaaS |
+| ------------- | ---------- | ----------- | ----------- | ------------- | ---- |
+| Menu/Services | ✅ Menu    | ✅ Services | ✅ Services | ✅ Categories | ❌   |
+| Events        | ✅         | ❌          | ❌          | ❌            | ❌   |
+| Portfolio     | ❌         | ✅          | ✅          | ✅ Showcase   | ❌   |
+| Leads         | ❌         | ✅          | ✅          | ❌            | ✅   |
+| Blog          | ✅         | ✅          | ✅          | ✅            | ✅   |
+| Reservations  | ✅         | ❌          | ❌          | ❌            | ❌   |
+| Pricing       | ✅         | Optional    | ❌          | Vendure       | ❌   |
 
 ### Admin UI Adaptation
 
 Conditionally render admin sections based on `business_type`:
+
 - Hide "Events" for non-restaurants
 - Show "Portfolio" for service businesses
 - Show "Leads" for lead-gen businesses
@@ -244,6 +249,7 @@ Week 4+:
 ## Technical Decisions
 
 ### Confirmed:
+
 - ✅ Separate frontend repos per brand (not multi-tenant frontend)
 - ✅ Shared backend API (Restaurant OS)
 - ✅ Keep Vendure for Printulu e-commerce
@@ -251,6 +257,7 @@ Week 4+:
 - ✅ AI content generation as differentiator
 
 ### To Decide:
+
 - Platform new name (user has ideas)
 - Vendure SDK integration depth
 - Pricing model for external clients (one-time vs. monthly vs. hybrid)
@@ -288,24 +295,24 @@ Week 4+:
 
 ## Success Metrics
 
-| Metric | Target |
-|--------|--------|
-| Handwerker site live | Week 2 end |
-| Statiker site live | Week 3 end |
-| Leads captured | Tracking from day 1 |
-| Printulu blog migrated | Week 4 |
-| Client satisfaction | Invoice paid promptly |
+| Metric                 | Target                |
+| ---------------------- | --------------------- |
+| Handwerker site live   | Week 2 end            |
+| Statiker site live     | Week 3 end            |
+| Leads captured         | Tracking from day 1   |
+| Printulu blog migrated | Week 4                |
+| Client satisfaction    | Invoice paid promptly |
 
 ---
 
 ## Risk Mitigation
 
-| Risk | Mitigation |
-|------|------------|
+| Risk                  | Mitigation                                           |
+| --------------------- | ---------------------------------------------------- |
 | 2-week deadline tight | Start with minimal viable features, add polish later |
-| Scope creep | Fixed feature list, defer nice-to-haves |
-| Client changes mind | Get sign-off on design before coding |
-| Technical debt | Document shortcuts, plan cleanup sprint |
+| Scope creep           | Fixed feature list, defer nice-to-haves              |
+| Client changes mind   | Get sign-off on design before coding                 |
+| Technical debt        | Document shortcuts, plan cleanup sprint              |
 
 ---
 
@@ -358,14 +365,15 @@ Phase 3: Self-service (Month 4+)
 
 ### Pricing Strategy Research:
 
-| Model | Competitors Using | Pros | Cons |
-|-------|-------------------|------|------|
-| One-time | Agencies (€2-5k) | Cash upfront | No recurring |
-| Monthly | Duda ($199/5 sites), GHL ($97-297) | Recurring revenue | Slower cash |
-| Hybrid | Some agencies | Best of both | Complex |
-| Usage-based | AI platforms | Scales with value | Unpredictable |
+| Model       | Competitors Using                  | Pros              | Cons          |
+| ----------- | ---------------------------------- | ----------------- | ------------- |
+| One-time    | Agencies (€2-5k)                   | Cash upfront      | No recurring  |
+| Monthly     | Duda ($199/5 sites), GHL ($97-297) | Recurring revenue | Slower cash   |
+| Hybrid      | Some agencies                      | Best of both      | Complex       |
+| Usage-based | AI platforms                       | Scales with value | Unpredictable |
 
 **Recommendation for 50-100 customers/year**:
+
 - Hybrid pricing: €500-1500 setup + €99-199/month
 - At 75 customers avg: €75k setup + €150k ARR = €225k year 1
 - Requires semi-automated onboarding by Month 3
@@ -402,14 +410,14 @@ Month 9-12: Scale (75-100 customers)
 
 ### Unit Economics Target:
 
-| Metric | Target |
-|--------|--------|
-| CAC | <€500 (content marketing, referrals) |
-| Setup fee | €500-1500 |
-| Monthly | €99-199 |
-| LTV (24 months) | €2,900-6,300 |
-| LTV:CAC | 6-12x |
-| Churn | <5% monthly |
+| Metric          | Target                               |
+| --------------- | ------------------------------------ |
+| CAC             | <€500 (content marketing, referrals) |
+| Setup fee       | €500-1500                            |
+| Monthly         | €99-199                              |
+| LTV (24 months) | €2,900-6,300                         |
+| LTV:CAC         | 6-12x                                |
+| Churn           | <5% monthly                          |
 
 ---
 

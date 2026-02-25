@@ -33,13 +33,13 @@ This project follows the **Golden Path** framework - a standardized structure fo
 
 ### What Each File Does
 
-| File | Purpose | When to Read |
-|------|---------|-------------|
-| **CLAUDE.md** | Your source of truth for: invariants (never break these), stack preferences, gotchas (hard-won lessons), common commands | **Always read FIRST** at session start |
-| **NEXT.md** | Current task in "Now" section, upcoming work in "Up Next", completed work in "Done (YYYY-MM)" | Read to know what to work on, update when tasks complete |
-| **DEBT.md** | Known issues, technical debt, TODOs that didn't fit in current sprint | Read when planning refactors or investigating bugs |
-| **GOLDEN_PATH.md** | Proven patterns for adding features correctly (if exists) | Read before implementing new features |
-| **decisions/** | ADRs explaining why architectural choices were made | Read when questioning "why was this built this way?" |
+| File               | Purpose                                                                                                                  | When to Read                                             |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------- |
+| **CLAUDE.md**      | Your source of truth for: invariants (never break these), stack preferences, gotchas (hard-won lessons), common commands | **Always read FIRST** at session start                   |
+| **NEXT.md**        | Current task in "Now" section, upcoming work in "Up Next", completed work in "Done (YYYY-MM)"                            | Read to know what to work on, update when tasks complete |
+| **DEBT.md**        | Known issues, technical debt, TODOs that didn't fit in current sprint                                                    | Read when planning refactors or investigating bugs       |
+| **GOLDEN_PATH.md** | Proven patterns for adding features correctly (if exists)                                                                | Read before implementing new features                    |
+| **decisions/**     | ADRs explaining why architectural choices were made                                                                      | Read when questioning "why was this built this way?"     |
 
 ---
 
@@ -52,6 +52,7 @@ This project follows the **Golden Path** framework - a standardized structure fo
 ```
 
 This command:
+
 - Shows your current task from NEXT.md
 - Displays git status
 - Shows recent commits
@@ -60,6 +61,7 @@ This command:
 ### Step 2: Validate Golden Path Setup
 
 Check these files exist:
+
 - [ ] `.claude/CLAUDE.md` exists
 - [ ] `.claude/NEXT.md` exists
 - [ ] `.claude/DEBT.md` exists
@@ -70,6 +72,7 @@ If any are missing, run `/init-memory` to bootstrap the structure.
 ### Step 3: Read Project DNA
 
 **ALWAYS read `.claude/CLAUDE.md` first**. It contains:
+
 - **Invariants** - Rules you must NEVER break
 - **Stack Preferences** - Technologies and patterns to use
 - **Gotchas** - Hard-won lessons (bugs to avoid)
@@ -77,6 +80,7 @@ If any are missing, run `/init-memory` to bootstrap the structure.
 - **Workflow** - Git practices, commit patterns
 
 **Command**:
+
 ```bash
 # Read CLAUDE.md to understand the project
 cat .claude/CLAUDE.md
@@ -99,16 +103,16 @@ cat .claude/CLAUDE.md
 
 ### Key Commands
 
-| Command | What It Does |
-|---------|-------------|
-| `/warmup` | Load context: current task, git status, recent commits |
-| `/next [task]` | Set new "Now" task in NEXT.md |
-| `/next done` | Mark current task done, promote next from queue |
-| `/ship` | Stage all changes, commit with conventional message, push |
-| `/shipped` | Mark tasks complete in NEXT.md, sync to Notion |
-| `/session-end` | Extract insights, update gotchas, create ADRs |
-| `/debt` | Scan for TODOs, update DEBT.md |
-| `/adr` | Create Architecture Decision Record |
+| Command        | What It Does                                              |
+| -------------- | --------------------------------------------------------- |
+| `/warmup`      | Load context: current task, git status, recent commits    |
+| `/next [task]` | Set new "Now" task in NEXT.md                             |
+| `/next done`   | Mark current task done, promote next from queue           |
+| `/ship`        | Stage all changes, commit with conventional message, push |
+| `/shipped`     | Mark tasks complete in NEXT.md, sync to Notion            |
+| `/session-end` | Extract insights, update gotchas, create ADRs             |
+| `/debt`        | Scan for TODOs, update DEBT.md                            |
+| `/adr`         | Create Architecture Decision Record                       |
 
 ---
 
@@ -119,6 +123,7 @@ cat .claude/CLAUDE.md
 **ALWAYS check `.claude/CLAUDE.md` for invariants**. These are rules you must NEVER break.
 
 Common invariants across projects:
+
 - TypeScript strict mode always
 - Never skip database migrations
 - Auth checks before mutations
@@ -132,6 +137,7 @@ Common invariants across projects:
 **Don't introduce new technologies** without explicit user approval.
 
 This project uses:
+
 - [FRONTEND_STACK]
 - [BACKEND_STACK]
 - [DATABASE_STACK]
@@ -144,6 +150,7 @@ If you need a new library, ask first.
 If `.claude/GOLDEN_PATH.md` exists, **read it before adding features**.
 
 It contains:
+
 - Proven patterns for common tasks
 - Examples from this codebase
 - Anti-patterns to avoid
@@ -152,6 +159,7 @@ It contains:
 ### Pattern 4: Update NEXT.md
 
 When you complete a task:
+
 ```
 1. Mark it [x] in "Done (YYYY-MM)" section
 2. Move next task from "Up Next" → "Now"
@@ -163,6 +171,7 @@ Or use `/shipped` to do this automatically.
 ### Pattern 5: Track Technical Debt
 
 Don't leave TODOs in code comments. Instead:
+
 ```
 1. Add to .claude/DEBT.md with context
 2. Prioritize by impact (High/Medium/Low)
@@ -180,8 +189,10 @@ Or use `/debt` to scan and update automatically.
 Gotchas are **hard-won lessons** - bugs that already bit this project once.
 
 **Example gotcha format**:
+
 ```markdown
 ## Gotchas (Hard-Won)
+
 - Supabase RLS requires .select() after .insert() to return data
 - Next.js caches aggressively - use revalidatePath()
 - Prices as cents (integer), never float
@@ -192,11 +203,13 @@ Gotchas are **hard-won lessons** - bugs that already bit this project once.
 ### ❌ Don't: Skip Reading CLAUDE.md
 
 Every session should start with:
+
 ```bash
 cat .claude/CLAUDE.md
 ```
 
 This is your **source of truth**. If you skip it, you'll:
+
 - Violate invariants
 - Repeat past mistakes
 - Use wrong technologies
@@ -205,6 +218,7 @@ This is your **source of truth**. If you skip it, you'll:
 ### ❌ Don't: Create Files Without Purpose
 
 **Before creating any file**, ask:
+
 - Does this belong in the project, or in `.claude/` docs?
 - Is there an existing file I should edit instead?
 - Will this file be maintained, or become stale?
@@ -214,6 +228,7 @@ This is your **source of truth**. If you skip it, you'll:
 ### ❌ Don't: Leave Debug Code
 
 Before `/ship`:
+
 - [ ] No `console.log` statements
 - [ ] No `alert()` calls
 - [ ] No commented-out code blocks
@@ -222,6 +237,7 @@ Before `/ship`:
 ### ❌ Don't: Bypass the Workflow
 
 **Always use the workflow**:
+
 - Don't commit without `/ship` (ensures conventional commits)
 - Don't close session without `/session-end` (loses insights)
 - Don't start work without `/warmup` (missing context)
@@ -302,33 +318,43 @@ Before `/ship`:
 ## 9. WHERE TO FIND INFORMATION
 
 ### "What's the tech stack?"
+
 → `.claude/CLAUDE.md` - Stack Preferences section
 
 ### "What should I never do?"
+
 → `.claude/CLAUDE.md` - Invariants section
 
 ### "What bugs should I watch out for?"
+
 → `.claude/CLAUDE.md` - Gotchas section
 
 ### "What should I work on?"
+
 → `.claude/NEXT.md` - Now section
 
 ### "What are known issues?"
+
 → `.claude/DEBT.md` - Full technical debt list
 
 ### "How do I add feature X correctly?"
+
 → `.claude/GOLDEN_PATH.md` - Feature patterns (if exists)
 
 ### "Why was this built this way?"
+
 → `.claude/decisions/` - Architecture Decision Records
 
 ### "How do I run dev server / tests / build?"
+
 → `.claude/CLAUDE.md` - Commands section
 
 ### "What's the deployment process?"
+
 → `.claude/CLAUDE.md` - Workflow section
 
 ### "How do I sync with Notion?"
+
 → `.claude/CLAUDE.md` - Notion section + `/shipped` command
 
 ---
@@ -411,36 +437,42 @@ Session End Checklist:
 ## 12. EMERGENCY REFERENCE
 
 ### "I don't know what to work on"
+
 ```bash
 cat .claude/NEXT.md
 # Read the "Now" section
 ```
 
 ### "I don't know the tech stack"
+
 ```bash
 cat .claude/CLAUDE.md
 # Read "Stack Preferences" section
 ```
 
 ### "I'm about to make a mistake"
+
 ```bash
 cat .claude/CLAUDE.md
 # Read "Invariants" and "Gotchas" sections
 ```
 
 ### "I broke something"
+
 ```bash
 cat .claude/DEBT.md
 # Check if it's a known issue with workaround
 ```
 
 ### "I made an architectural decision"
+
 ```bash
 /adr
 # Create Architecture Decision Record
 ```
 
 ### "I finished my task"
+
 ```bash
 /shipped
 # Updates NEXT.md and syncs Notion

@@ -1,38 +1,35 @@
-Manage task focus with NEXT.md or BMM sprint-status integration:
+Manage task focus with NEXT.md, features/, or BMM sprint-status integration:
 
-## Mode Detection
+## Mode Detection (Priority Order)
 
-1. **Check for BMM Sprint Context** (priority):
-   - Look for `docs/sprint-status.yaml`
-   - If found: Use BMM mode (sync with stories)
-   - If not found: Use Solo mode (NEXT.md only)
+1. **BMM Mode**: `docs/sprint-status.yaml` exists
+2. **Features Mode**: `.claude/features/` folder exists
+3. **Solo Mode**: Only `.claude/NEXT.md` exists
 
 ---
 
-## BMM Mode (when sprint-status.yaml exists)
+## BMM Mode (sprint-status.yaml)
 
-**If no argument provided**: Show current story status
+**No argument**: Show current story status
+
 - Display current `in_progress` story from sprint-status.yaml
 - Show story tasks/subtasks with completion status
 - Show remaining stories in current epic
 
-**If argument provided**:
-- `done` → Mark current story as `completed` in sprint-status.yaml
-  - Updates story status to "completed"
-  - Shows next pending story in epic
-  - If epic complete: Suggest `/session-end` for retrospective
-- `[story-id]` → Set specific story as `in_progress`
-  - Only allows setting stories within current epic
-  - Validates story exists in sprint-status.yaml
+**With argument**:
 
-**Output format (BMM)**:
+- `done` → Mark current story as `completed`, show next pending story
+- `[story-id]` → Set specific story as `in_progress`
+
+**Output:**
+
 ```
 🔷 BMM Active | Epic: [epic-N]
 
 🎯 STORY: [story-id] - [title]
-   ☐ Task 1
-   ☑ Task 2 (done)
-   ☐ Task 3
+   [ ] Task 1
+   [x] Task 2 (done)
+   [ ] Task 3
 
 📋 UP NEXT in this epic:
 - [story-id-2] - [title]
@@ -41,30 +38,84 @@ Manage task focus with NEXT.md or BMM sprint-status integration:
 
 ---
 
-## Solo Mode (when no sprint-status.yaml)
+## Features Mode (.claude/features/)
 
-**If no argument provided**, show current NEXT.md status.
+**No argument**: Show current feature status
 
-**If argument provided**, update NEXT.md:
+- Read `.claude/NEXT.md` for current "Now" feature
+- Parse feature spec for success criteria progress
+- Show Up Next features
 
-1. Read current `.claude/NEXT.md`
+**Output:**
 
-2. Parse the action:
-   - "done" or "complete" → Check off current "Now" item, promote first "Up Next" to "Now"
-   - "add [task]" → Add to "Up Next" list (max 2 items in Up Next)
-   - "[task description]" → Set as new "Now" (move old Now to Up Next)
+```
+🎯 Features Mode
 
-3. Rules:
-   - Max 1 item in "Now"
-   - Max 2 items in "Up Next"
-   - If adding would exceed, ask which to remove
-   - Auto-prune completed items
+📋 NOW: F-011 Invoice Parser (3/5 criteria done)
+🌿 Branch: feature/F-011-invoice-parser
 
-4. Write updated NEXT.md
+📋 UP NEXT:
+- F-012 Price Checker
+- F-013 Recipe Management
+```
 
-5. Confirm: "✓ Now: [task]"
+**With argument**:
 
-**Output format (Solo)**:
+- `done` → Mark current feature as done:
+  1. Feature should be shipped via `/ship` (which handles PR + merge)
+  2. If on feature branch: Warn "Use /ship to complete feature with PR"
+  3. If already on main (post-merge):
+     - Update spec status to "Done"
+     - Move to `.claude/features/done/`
+     - Promote first Up Next to Now
+  4. TTS: "Done. Now: [next feature]"
+
+- `F-XXX` → Set specific feature as Now (creates branch!):
+  1. Save any uncommitted changes: `git stash`
+  2. Switch to main and pull latest: `git checkout main && git pull`
+  3. Create feature branch: `git checkout -b feature/F-XXX-kebab-name`
+  4. Restore stash if any: `git stash pop`
+  5. Move current Now to Up Next in NEXT.md
+  6. Set F-XXX as new Now in NEXT.md
+  7. Update feature spec status to "In Progress"
+  8. TTS: "Now: [feature name]. Branch created."
+
+- `start` (no feature specified) → Start next Up Next feature:
+  1. Get first item from Up Next section
+  2. Run same flow as `F-XXX` above
+
+- `create "Feature Name"` → Create new feature (Claude fills from context):
+  1. Find next available F-XXX number
+  2. Generate kebab-case filename
+  3. Auto-fill spec from conversation context:
+     - Description from what was discussed
+     - Schema from mentioned tables
+     - Dependencies from mentioned features
+     - Priority defaults to P1
+  4. Add to NEXT.md as Up Next
+  5. Output: "Created F-XXX: [Name]. Added to Up Next."
+
+---
+
+## Solo Mode (NEXT.md only)
+
+**No argument**: Show current NEXT.md status
+
+**With argument**:
+
+- `done` or `complete` → Check off current "Now" item, promote first "Up Next"
+- `add [task]` → Add to "Up Next" list (max 2 items)
+- `[task description]` → Set as new "Now" (move old Now to Up Next)
+
+**Rules:**
+
+- Max 1 item in "Now"
+- Max 2 items in "Up Next"
+- If adding would exceed, ask which to remove
+- Auto-prune completed items
+
+**Output:**
+
 ```
 ⚡ Solo Mode
 
@@ -77,29 +128,63 @@ Manage task focus with NEXT.md or BMM sprint-status integration:
 
 ---
 
-## Example Usage
+## Feature Creation (Features Mode Only)
 
-**BMM Mode:**
-- `/next` - Show current story and tasks
-- `/next done` - Complete current story, show next
-- `/next epic-1-story-3` - Jump to specific story
+When `/next create "Feature Name"` is called:
 
-**Solo Mode:**
-- `/next` - Show current status
-- `/next done` - Complete current task
-- `/next Fix auth bug` - Set as current focus
-- `/next add Write tests` - Add to up next
+1. **Find next F-XXX**:
+   - Scan BOTH `.claude/features/` AND `.claude/features/done/` for all F-XXX files
+   - Find highest number across both folders
+   - Increment by 1 (ensures unique numbers, never reuse done feature IDs)
+2. **Generate filename**: `F-XXX-kebab-name.md`
+3. **Auto-fill from conversation** (no questions!):
+
+```markdown
+# F-XXX: [Feature Name]
+
+**Status:** Planned
+**Priority:** P1
+**Dependencies:** [detected from conversation or "None"]
+
+## Description
+
+[Summarized from conversation context]
+
+## User Story
+
+Als [detected role] kann ich [detected action], damit [detected benefit].
+
+## Core Features
+
+[Bullet points from conversation]
+
+## Database Schema
+
+[Tables mentioned or "No schema changes"]
+
+## Success Criteria
+
+- [ ] [Extracted from conversation]
+- [ ] Tests pass
+- [ ] Deployed to production
+```
+
+4. **Add to NEXT.md**: Insert in Up Next section
+5. **Output**: "Created F-XXX: [Name]. Added to Up Next."
 
 ---
 
 ## TTS Momentum Marker
 
-After updating task/story, speak the new focus:
+After updating task/feature/story:
+
 ```bash
-.claude/hooks/play-tts.sh "Now: [task/story title]"
+.claude/hooks/play-tts.sh "Now: [title]"
 ```
 
-Keep the message short (under 100 characters). Examples:
+Examples:
+
 - Setting new task: "Now: Fix login bug"
 - Completing task: "Done. Now: Write tests"
+- Features: "Now: Invoice Parser"
 - BMM story: "Now: Story 3 Add user auth"

@@ -22,6 +22,7 @@ amk-content/
 My personal Claude Code configuration for AI-assisted development. See [vibe-coding-setup/README.md](./vibe-coding-setup/README.md).
 
 Highlights:
+
 - One-command project entry with full context
 - Task tracking with `/next`
 - One-command deploy with `/ship`
@@ -31,10 +32,11 @@ Highlights:
 ## Articles
 
 Coming soon:
+
 - [ ] "My Vibe Coding Setup: 10x Productivity with Claude Code"
 - [ ] "Building a Memory System for AI Pair Programming"
 - [ ] "Visual Regression Testing with Claude Code"
 
 ---
 
-*Personal knowledge repository by AMK*
+_Personal knowledge repository by AMK_

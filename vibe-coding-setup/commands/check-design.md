@@ -34,6 +34,7 @@ Automated visual regression check for deployed sites.
 4. Compare screenshots to baselines in `~/.claude/baselines/[project]/`
 
 5. Report results:
+
    ```
    VISUAL REGRESSION CHECK - [project]
 

@@ -35,6 +35,7 @@ pnpm build
 See `.env.example` for all required environment variables.
 
 Key variables:
+
 - `DATABASE_URL` - Database connection string
 - `NEXT_PUBLIC_API_URL` - API endpoint URL
 
@@ -59,16 +60,19 @@ src/
 ## Common Tasks
 
 ### Run Tests
+
 ```bash
 pnpm test
 ```
 
 ### Type Check
+
 ```bash
 pnpm validate:types
 ```
 
 ### Lint
+
 ```bash
 pnpm lint
 ```

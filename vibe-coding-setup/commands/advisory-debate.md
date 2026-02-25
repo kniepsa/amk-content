@@ -15,7 +15,9 @@ Structured deliberation with five expert perspectives for strategic decisions.
 ## The Five Experts
 
 ### 1. CTO Perspective (Technical Feasibility)
+
 **Questions to answer:**
+
 - Can we build this with our current stack?
 - What's the technical complexity (1-10)?
 - What technical debt will this create?
@@ -23,6 +25,7 @@ Structured deliberation with five expert perspectives for strategic decisions.
 - What's the maintenance burden?
 
 **Red flags to raise:**
+
 - Scalability concerns
 - Security implications
 - Integration complexity
@@ -31,7 +34,9 @@ Structured deliberation with five expert perspectives for strategic decisions.
 ---
 
 ### 2. GTM Lead Perspective (Go-to-Market)
+
 **Questions to answer:**
+
 - How do we position this in the market?
 - What's the competitive landscape?
 - Who is the ideal customer for this?
@@ -39,6 +44,7 @@ Structured deliberation with five expert perspectives for strategic decisions.
 - How do we launch and promote this?
 
 **Red flags to raise:**
+
 - Market timing concerns
 - Competitive threats
 - Positioning confusion
@@ -47,7 +53,9 @@ Structured deliberation with five expert perspectives for strategic decisions.
 ---
 
 ### 3. Product Lead Perspective (Feature Prioritization)
+
 **Questions to answer:**
+
 - Does this align with our product vision?
 - What's the user value vs effort ratio?
 - How does this fit in our roadmap?
@@ -55,6 +63,7 @@ Structured deliberation with five expert perspectives for strategic decisions.
 - What's the MVP vs full vision?
 
 **Red flags to raise:**
+
 - Scope creep
 - Feature bloat
 - Misaligned priorities
@@ -63,7 +72,9 @@ Structured deliberation with five expert perspectives for strategic decisions.
 ---
 
 ### 4. UX Lead Perspective (User Experience)
+
 **Questions to answer:**
+
 - How does this improve user workflow?
 - What's the learning curve?
 - How does this affect existing users?
@@ -71,6 +82,7 @@ Structured deliberation with five expert perspectives for strategic decisions.
 - Is this solving a real user pain?
 
 **Red flags to raise:**
+
 - Usability issues
 - Cognitive overload
 - Accessibility gaps
@@ -79,7 +91,9 @@ Structured deliberation with five expert perspectives for strategic decisions.
 ---
 
 ### 5. Entrepreneur Perspective (Business Viability)
+
 **Questions to answer:**
+
 - Does this move us toward profitability?
 - What's the ROI timeline?
 - What are the risks if we DON'T do this?
@@ -87,6 +101,7 @@ Structured deliberation with five expert perspectives for strategic decisions.
 - Is this a distraction or core to success?
 
 **Red flags to raise:**
+
 - Cash flow impact
 - Opportunity cost
 - Market validation gaps
@@ -97,6 +112,7 @@ Structured deliberation with five expert perspectives for strategic decisions.
 ## Debate Format
 
 ### Round 1: Initial Positions (each expert)
+
 ```
 [Expert]: My position on [decision] is [support/oppose/conditional].
 Reasoning: [2-3 key points]
@@ -104,13 +120,16 @@ Key concern: [biggest worry]
 ```
 
 ### Round 2: Cross-Examination
+
 Each expert challenges at least one other perspective:
+
 ```
 [Expert A] to [Expert B]: How do you address [concern]?
 [Expert B] response: [defense or concession]
 ```
 
 ### Round 3: Synthesis
+
 ```
 Points of Agreement:
 - [shared conclusion 1]
@@ -132,31 +151,36 @@ Decision Owner's Call:
 
 ```markdown
 ## Advisory Debate: [Decision Topic]
+
 Date: [Date]
 
 ### Decision Under Consideration
+
 [Clear statement of what we're deciding]
 
 ### Expert Summaries
 
-| Expert | Position | Confidence | Key Concern |
-|--------|----------|------------|-------------|
-| CTO | Support/Oppose | High/Med/Low | [concern] |
-| GTM | Support/Oppose | High/Med/Low | [concern] |
-| Product | Support/Oppose | High/Med/Low | [concern] |
-| UX | Support/Oppose | High/Med/Low | [concern] |
-| Entrepreneur | Support/Oppose | High/Med/Low | [concern] |
+| Expert       | Position       | Confidence   | Key Concern |
+| ------------ | -------------- | ------------ | ----------- |
+| CTO          | Support/Oppose | High/Med/Low | [concern]   |
+| GTM          | Support/Oppose | High/Med/Low | [concern]   |
+| Product      | Support/Oppose | High/Med/Low | [concern]   |
+| UX           | Support/Oppose | High/Med/Low | [concern]   |
+| Entrepreneur | Support/Oppose | High/Med/Low | [concern]   |
 
 ### Consensus Score: [X/5 in favor]
 
 ### Key Debate Points
+
 1. [Major point of contention and resolution]
 2. [Second point]
 
 ### Recommendation
+
 [GO / NO-GO / CONDITIONAL with specific conditions]
 
 ### If Proceeding, Watch For:
+
 - [Risk to monitor]
 - [Metric to track]
 - [Decision checkpoint]

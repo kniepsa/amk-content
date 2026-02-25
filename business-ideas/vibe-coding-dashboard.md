@@ -9,6 +9,7 @@
 ## Target Customer
 
 **Semi-technical entrepreneurs** who:
+
 - Have a SaaS idea and want to build it themselves
 - Are willing to install dev tools (Node, VS Code, git)
 - Find terminal/command line scary but want to learn
@@ -17,6 +18,7 @@
 - Want to "learn by doing" with AI assistance
 
 **NOT targeting:**
+
 - Complete non-technical users (too big a gap)
 - Experienced developers (they prefer terminal)
 
@@ -68,17 +70,20 @@ Task auto-marked complete → Syncs to Notion
 ### Stack Choice: Next.js + Supabase + Vercel
 
 **Why Next.js:**
+
 - You're already expert in Next.js (dogfood your own stack)
 - Electron wrapper available (next-on-electron)
 - Can deploy as web app OR desktop app
 - Easy to build beautiful UI quickly
 
 **Why Supabase:**
+
 - Real-time subscriptions (perfect for live updates)
 - User auth (if multi-user in future)
 - RLS for security
 
 **Why Vercel:**
+
 - Instant deploys
 - Your existing deployment target
 
@@ -139,6 +144,7 @@ Task auto-marked complete → Syncs to Notion
 **User Story:** "I want to manage my tasks visually, not edit markdown files"
 
 **UI Mockup:**
+
 ```
 ┌─────────────────────────────────────────────────┐
 │  Vibe Coding - restaurant-os                   │
@@ -161,18 +167,24 @@ Task auto-marked complete → Syncs to Notion
 ```
 
 **Backend:**
+
 - Watch `.claude/NEXT.md` file changes
 - Parse markdown format:
+
   ```markdown
   ## Now
+
   - [ ] Add user login
 
   ## Up Next
+
   - [ ] Fix menu loading
 
   ## Done (2025-01)
+
   - [x] Setup Supabase
   ```
+
 - Expose API:
   ```typescript
   GET  /api/tasks        → List all tasks
@@ -181,6 +193,7 @@ Task auto-marked complete → Syncs to Notion
   ```
 
 **Frontend:**
+
 - React DnD for drag-and-drop
 - Real-time updates via WebSocket
 - Optimistic UI updates
@@ -190,6 +203,7 @@ Task auto-marked complete → Syncs to Notion
 **User Story:** "I want to see errors visually, not dig through terminal output"
 
 **UI Mockup:**
+
 ```
 ┌─────────────────────────────────────────────────┐
 │  Errors & Warnings                         [3] │
@@ -212,6 +226,7 @@ Task auto-marked complete → Syncs to Notion
 ```
 
 **Backend:**
+
 - Listen to git hook outputs:
   - `pre-push.mjs` runs TypeScript, lint, build
   - Parse stderr for errors
@@ -223,6 +238,7 @@ Task auto-marked complete → Syncs to Notion
   ```
 
 **Frontend:**
+
 - Real-time error stream via Server-Sent Events
 - Click error → Open in VS Code (using `code://` URL scheme)
 - "Ask Claude to Fix" → Auto-prompt Claude Code
@@ -232,6 +248,7 @@ Task auto-marked complete → Syncs to Notion
 **User Story:** "I want to see my changes visually, not use git commands"
 
 **UI Mockup:**
+
 ```
 ┌─────────────────────────────────────────────────┐
 │  Git Status                                     │
@@ -263,6 +280,7 @@ Task auto-marked complete → Syncs to Notion
 ```
 
 **Backend:**
+
 - Execute git commands:
   ```bash
   git status --porcelain
@@ -278,6 +296,7 @@ Task auto-marked complete → Syncs to Notion
   ```
 
 **Frontend:**
+
 - Poll `/api/git/status` every 5 seconds
 - "Ship It" button → Trigger full workflow
 - Show progress: Stage → Commit → Push → Deploy
@@ -287,6 +306,7 @@ Task auto-marked complete → Syncs to Notion
 **User Story:** "I want to see what Claude is doing in real-time"
 
 **UI Mockup:**
+
 ```
 ┌─────────────────────────────────────────────────┐
 │  Claude Session                            [●] │
@@ -312,23 +332,25 @@ Task auto-marked complete → Syncs to Notion
 ```
 
 **Backend:**
+
 - Spawn Claude Code as child process:
   ```javascript
-  const claude = spawn('claude', ['--continue'], {
+  const claude = spawn("claude", ["--continue"], {
     cwd: projectPath,
-    stdio: 'pipe'
+    stdio: "pipe",
   });
   ```
 - Stream stdout/stderr to dashboard
 - Parse activity from Claude's output
 - Expose WebSocket:
   ```typescript
-  ws.on('session-activity', (event) => {
+  ws.on("session-activity", (event) => {
     // Send to frontend
   });
   ```
 
 **Frontend:**
+
 - WebSocket connection for real-time updates
 - Scrolling activity log
 - "Ask Claude" → Send custom prompt
@@ -338,6 +360,7 @@ Task auto-marked complete → Syncs to Notion
 **User Story:** "I don't want to remember slash commands, just give me buttons"
 
 **UI Mockup:**
+
 ```
 ┌─────────────────────────────────────────────────┐
 │  Quick Actions                                  │
@@ -353,6 +376,7 @@ Task auto-marked complete → Syncs to Notion
 ```
 
 **Backend:**
+
 - Map buttons to slash commands:
   ```typescript
   '/ship'       → git add . && commit && push
@@ -366,6 +390,7 @@ Task auto-marked complete → Syncs to Notion
   ```
 
 **Frontend:**
+
 - Button grid
 - Show progress modal when action running
 - Toast notifications on completion
@@ -375,14 +400,17 @@ Task auto-marked complete → Syncs to Notion
 **User Story:** "I manage everything in Notion, keep it synced automatically"
 
 **Features:**
+
 - Create task in Notion → Auto-creates in NEXT.md
 - Complete task in dashboard → Marks done in Notion
 - Update rock progress → Syncs to Notion database
 - View Notion rock details in dashboard sidebar
 
 **Backend:**
+
 - Notion API client (@notionhq/client)
 - Bi-directional sync:
+
   ```typescript
   // Notion → NEXT.md
   setInterval(() => {
@@ -398,6 +426,7 @@ Task auto-marked complete → Syncs to Notion
   ```
 
 **Frontend:**
+
 - "Sync with Notion" button
 - Notion rock progress widget
 - Link to open task in Notion
@@ -409,6 +438,7 @@ Task auto-marked complete → Syncs to Notion
 **Goal:** Build API server that reads/writes .claude/ files
 
 **Tasks:**
+
 1. Initialize Next.js project with API routes
 2. File system watcher for .claude/ folder (chokidar)
 3. NEXT.md parser (markdown → JSON)
@@ -421,6 +451,7 @@ Task auto-marked complete → Syncs to Notion
    - GET /api/git/commits
 
 **Tech:**
+
 - Next.js 14 API routes
 - chokidar for file watching
 - simple-git for git commands
@@ -431,6 +462,7 @@ Task auto-marked complete → Syncs to Notion
 **Goal:** Build visual task board + error monitor
 
 **Tasks:**
+
 1. Task board component (React DnD)
 2. Error monitor component
 3. Git status component
@@ -438,6 +470,7 @@ Task auto-marked complete → Syncs to Notion
 5. Tailwind styling
 
 **Tech:**
+
 - React DnD (drag-and-drop)
 - SWR (data fetching)
 - Tailwind CSS (styling)
@@ -448,6 +481,7 @@ Task auto-marked complete → Syncs to Notion
 **Goal:** Launch Claude Code from dashboard, monitor sessions
 
 **Tasks:**
+
 1. Process spawning (child_process.spawn)
 2. stdout/stderr streaming
 3. WebSocket for real-time logs
@@ -455,6 +489,7 @@ Task auto-marked complete → Syncs to Notion
 5. One-click action buttons
 
 **Tech:**
+
 - child_process (spawn Claude)
 - ws (WebSocket server)
 - Server-Sent Events (real-time updates)
@@ -464,12 +499,14 @@ Task auto-marked complete → Syncs to Notion
 **Goal:** Bi-directional sync with Notion
 
 **Tasks:**
+
 1. Notion API setup (@notionhq/client)
 2. Task sync (Notion ↔ NEXT.md)
 3. Rock progress updates
 4. Webhook for real-time Notion changes
 
 **Tech:**
+
 - @notionhq/client
 - Cron jobs for polling
 - Webhooks (if available)
@@ -479,6 +516,7 @@ Task auto-marked complete → Syncs to Notion
 **Goal:** Ship as desktop app + web app
 
 **Tasks:**
+
 1. Electron wrapper (nextron or next-on-electron)
 2. Installer (electron-builder)
 3. Web version on Vercel
@@ -486,6 +524,7 @@ Task auto-marked complete → Syncs to Notion
 5. Onboarding flow
 
 **Tech:**
+
 - Electron (desktop app)
 - Vercel (web deployment)
 - Clerk or Supabase Auth
@@ -525,17 +564,20 @@ Task auto-marked complete → Syncs to Notion
 ## Pricing Model
 
 ### Free Tier (Personal Use)
+
 - 1 project
 - All core features
 - Local-only (no cloud sync)
 
 ### Pro Tier ($29/mo)
+
 - Unlimited projects
 - Cloud sync (access from multiple machines)
 - Team collaboration (shared task boards)
 - Priority support
 
 ### Enterprise ($199/mo)
+
 - White-label branding
 - SSO integration
 - Custom slash commands
@@ -544,22 +586,26 @@ Task auto-marked complete → Syncs to Notion
 ## Go-to-Market Strategy
 
 ### Phase 1: Personal Use (Months 1-3)
+
 - Build MVP
 - Use on your own 5 projects
 - Iterate based on personal needs
 
 ### Phase 2: Beta (Months 4-6)
+
 - Invite 10 entrepreneur friends
 - Collect feedback
 - Fix bugs, add polish
 
 ### Phase 3: Launch (Month 7)
+
 - Product Hunt launch
 - Blog post: "I Built a GUI for Claude Code"
 - Share on IndieHackers, Reddit, Twitter
 - Free tier to drive adoption
 
 ### Phase 4: Monetize (Month 8+)
+
 - Launch Pro tier ($29/mo)
 - Corporate training workshops
 - Notion Marketplace listing
@@ -567,45 +613,51 @@ Task auto-marked complete → Syncs to Notion
 ## Success Metrics
 
 **Adoption:**
+
 - 100 free users (Month 1)
 - 500 free users (Month 3)
 - 50 paying users (Month 6)
 
 **Engagement:**
+
 - 70% weekly active users
 - 5+ tasks created per user per week
 - 3+ "Ship It" deploys per user per week
 
 **Revenue:**
+
 - $1.5K MRR (Month 6)
 - $5K MRR (Month 12)
 
 ## Competitive Advantage
 
 **vs Lovable/Bolt:**
+
 - They generate full apps (AI does everything)
 - You teach workflow (entrepreneur learns to code)
 - Their lock-in → Your real code ownership
 
 **vs Cursor:**
+
 - Cursor is IDE extension (still code-focused)
 - You're dashboard (task-focused, visual)
 - Cursor for technical → You for semi-technical
 
 **Your Moat:**
+
 - Opinionated (Next.js + Supabase only) = deeper integration
 - Workflow-focused (not just code generation)
 - Notion integration (where entrepreneurs already live)
 
 ## Technical Risks & Mitigations
 
-| Risk | Likelihood | Mitigation |
-|------|------------|------------|
-| Claude Code API unstable | Medium | Spawn as subprocess, parse output |
-| File watching breaks | Low | Use battle-tested chokidar |
-| Notion API rate limits | Medium | Cache + debounce syncs |
-| Users don't install Claude | High | Auto-install script in onboarding |
-| Electron app too heavy | Medium | Also ship web version |
+| Risk                       | Likelihood | Mitigation                        |
+| -------------------------- | ---------- | --------------------------------- |
+| Claude Code API unstable   | Medium     | Spawn as subprocess, parse output |
+| File watching breaks       | Low        | Use battle-tested chokidar        |
+| Notion API rate limits     | Medium     | Cache + debounce syncs            |
+| Users don't install Claude | High       | Auto-install script in onboarding |
+| Electron app too heavy     | Medium     | Also ship web version             |
 
 ## Next Steps (This Week)
 
@@ -618,6 +670,7 @@ Task auto-marked complete → Syncs to Notion
 ## Files to Create
 
 ### Backend:
+
 ```
 /api/
   tasks/
@@ -640,6 +693,7 @@ Task auto-marked complete → Syncs to Notion
 ```
 
 ### Frontend:
+
 ```
 /components/
   TaskBoard.tsx       # Kanban board
@@ -684,6 +738,7 @@ Before building, need to confirm:
 ### Sarah's Story: First-Time Entrepreneur Building a SaaS
 
 **Sarah's Background:**
+
 - Non-technical entrepreneur
 - Has idea for B2B SaaS (project management for restaurants)
 - Knows basic HTML/CSS from website building
@@ -970,6 +1025,7 @@ Sarah clicks "Ask Claude to Fix All"
 ```
 
 **What Sarah Learned:**
+
 - Errors happen (it's normal!)
 - Claude can fix them automatically
 - She's not stuck (no scary terminal errors to Google)
@@ -981,16 +1037,20 @@ Sarah clicks "Ask Claude to Fix All"
 ### Core Problem It Solves
 
 **Without GUI:**
+
 ```
 User → Terminal → Type commands → Read output → Interpret errors → Fix → Repeat
 ```
+
 ↓
 **Intimidating, error-prone, requires memorization**
 
 **With GUI:**
+
 ```
 User → Dashboard → Click buttons → See visual feedback → Click "Fix" → Done
 ```
+
 ↓
 **Friendly, guided, no memorization needed**
 
@@ -1001,6 +1061,7 @@ User → Dashboard → Click buttons → See visual feedback → Click "Fix" →
 #### 1. **Removes Terminal Fear**
 
 **Before (Terminal):**
+
 ```bash
 $ claude --continue
 [Claude Code v1.2.0]
@@ -1018,6 +1079,7 @@ What would you like to work on?
 **User thinks:** "What do I type? What's CLAUDE.md? What's git status? I'm scared."
 
 **After (GUI Dashboard):**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Welcome Back! 👋                                       │
@@ -1036,6 +1098,7 @@ What would you like to work on?
 #### 2. **Visualizes Hidden State**
 
 **What Claude Code does behind the scenes:**
+
 - Reads CLAUDE.md for invariants
 - Reads NEXT.md for current task
 - Checks git status
@@ -1070,6 +1133,7 @@ Git Visualizer:
 #### 3. **Makes Errors Actionable**
 
 **Without GUI (Terminal):**
+
 ```
 src/auth/login.tsx:42:15 - error TS2322: Type 'string | undefined'
 is not assignable to type 'string'.
@@ -1082,6 +1146,7 @@ is not assignable to type 'string'.
 **User thinks:** "What?? Where is line 42? What's TS2322? How do I fix this?"
 
 **With GUI:**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  🔴 TypeScript Error                                    │
@@ -1104,6 +1169,7 @@ Click "Ask Claude to Fix" → Fixed automatically
 **Without GUI:** User stares at terminal wondering "Is it done? Is it stuck? Should I wait?"
 
 **With GUI:**
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Building Dashboard... (Step 3 of 5)                    │
@@ -1125,6 +1191,7 @@ User knows exactly what's happening and when it'll be done.
 #### 5. **Replaces Command Memorization**
 
 **Without GUI:** User must remember:
+
 - `/warmup` - Load context
 - `/ship` - Deploy
 - `/shipped` - Mark done
@@ -1133,6 +1200,7 @@ User knows exactly what's happening and when it'll be done.
 - `/adr` - Create decision record
 
 **With GUI:** Just buttons:
+
 ```
 [Warmup] [Ship It] [Mark Complete] [Scan Debt] [Check Design] [New ADR]
 ```
@@ -1144,12 +1212,14 @@ One-click, no memorization.
 #### 6. **Bridges Code ↔ Notion**
 
 **Without GUI:**
+
 - User manages tasks in Notion
 - Switches to terminal to code
 - Manually updates Notion when done
 - Context switching = friction
 
 **With GUI:**
+
 ```
 Dashboard shows both in one view:
 
@@ -1173,6 +1243,7 @@ Complete task in either → Auto-syncs to both
 **Without GUI:** User never sees the actual code being written
 
 **With GUI:**
+
 ```
 Activity Log:
   2:15 PM  Creating Dashboard.tsx...
@@ -1201,6 +1272,7 @@ User can **watch and learn** React/TypeScript patterns.
 #### 8. **Reduces Deployment Fear**
 
 **Without GUI:**
+
 ```bash
 $ git add .
 $ git commit -m "add dashboard"
@@ -1209,6 +1281,7 @@ $ # Wait... did it deploy? Check Vercel manually...
 ```
 
 **With GUI:**
+
 ```
 [Ship It] button → Shows progress:
 
@@ -1227,17 +1300,17 @@ One click, visual confirmation, no fear.
 
 ## Summary: GUI Value Proposition
 
-| Without GUI (Terminal) | With GUI (Dashboard) |
-|------------------------|----------------------|
-| Must memorize slash commands | Click buttons |
-| Terminal output is scary | Friendly visual feedback |
-| Errors are cryptic | Plain English explanations |
-| No progress indication | Step-by-step progress bars |
-| Manual Notion sync | Auto-sync both ways |
-| Can't see what Claude is doing | Real-time activity log |
-| Must Google errors | "Ask Claude to Fix" button |
-| No learning happening | Watch code being written |
-| Git commands required | Visual git status + one-click ship |
-| Context scattered (terminal, Notion, VS Code) | Everything in one dashboard |
+| Without GUI (Terminal)                        | With GUI (Dashboard)               |
+| --------------------------------------------- | ---------------------------------- |
+| Must memorize slash commands                  | Click buttons                      |
+| Terminal output is scary                      | Friendly visual feedback           |
+| Errors are cryptic                            | Plain English explanations         |
+| No progress indication                        | Step-by-step progress bars         |
+| Manual Notion sync                            | Auto-sync both ways                |
+| Can't see what Claude is doing                | Real-time activity log             |
+| Must Google errors                            | "Ask Claude to Fix" button         |
+| No learning happening                         | Watch code being written           |
+| Git commands required                         | Visual git status + one-click ship |
+| Context scattered (terminal, Notion, VS Code) | Everything in one dashboard        |
 
 **The GUI doesn't replace Claude Code - it makes it accessible to people who would never use the terminal.**

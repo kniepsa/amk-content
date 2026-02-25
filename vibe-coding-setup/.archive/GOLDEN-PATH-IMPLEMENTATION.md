@@ -33,7 +33,9 @@ The "Sustainable Speed Golden Path" - a minimal, pragmatic structure for vibe co
 **Location**: `~/.claude/commands/`
 
 #### `/init-project`
+
 **Updated**: Scaffolds full golden path structure
+
 - Creates `.claude/` folder with CLAUDE.md, NEXT.md, DEBT.md
 - Adds `.claude/decisions/` for strategic ADRs
 - Verifies README.md has Quick Start section
@@ -41,7 +43,9 @@ The "Sustainable Speed Golden Path" - a minimal, pragmatic structure for vibe co
 - Detects project info automatically
 
 #### `/audit-structure` ✨ NEW
+
 **Purpose**: Audits projects against golden path standards
+
 - Checks .claude/ structure completeness
 - Validates 2-3 strategic ADRs (not too many!)
 - Checks README.md quality (Quick Start, Deploy sections)
@@ -54,6 +58,7 @@ The "Sustainable Speed Golden Path" - a minimal, pragmatic structure for vibe co
 **Location**: `~/.bashrc`
 
 Already exists:
+
 - `init-project` - Scaffolds .claude/ folder from templates
 - Project quick-jumps: `resto()`, `salvator()`, `hoettche()`, `sdk()`
 
@@ -62,6 +67,7 @@ Already exists:
 All 4 projects migrated to golden path structure:
 
 ### ✅ restaurant-os
+
 - Created `.env.example`
 - Replaced boilerplate README.md with proper Quick Start
 - Added Security section to .claude/CLAUDE.md
@@ -69,18 +75,21 @@ All 4 projects migrated to golden path structure:
 - Has 3 strategic ADRs (perfect!)
 
 ### ✅ salvator-standalone
+
 - Updated `.env.example` with all current env vars
 - Replaced boilerplate README with restaurant-specific content
 - Archived scattered docs (18 files → .archive/)
 - Has 1 strategic ADR (migration from Sanity)
 
 ### ✅ em-hoettche-restaurant-standalone
+
 - Updated `.env.example` with all env vars
 - Replaced boilerplate README with proper Quick Start
 - Archived scattered docs (7 files → .archive/)
 - Has 1 strategic ADR (migration from Sanity)
 
 ### ✅ restaurant-os-sdk
+
 - Created `.env.example` (explains SDK needs no env vars)
 - README already excellent (comprehensive API docs)
 - Kept MIGRATION.md (useful for SDK consumers)
@@ -124,16 +133,19 @@ All 4 projects migrated to golden path structure:
 ## Sustainable Speed Principles
 
 ### 1. AI-Readable Memory (.claude/ folder)
+
 - Stays current because Claude reads/updates it
 - Small, focused files (not 500-line READMEs)
 - Invariants and gotchas (hard-won knowledge)
 
 ### 2. Strategic ADRs (2-3 per project)
+
 - Only BIG decisions (database, framework, major migrations)
 - Not tactical decisions (component structure, linting)
 - Template shows: Context → Decision → Consequences → Alternatives
 
 ### 3. README.md Single Entry Point
+
 - Quick Start (install → run)
 - What This Does (2-3 sentences)
 - Stack (list)
@@ -141,12 +153,14 @@ All 4 projects migrated to golden path structure:
 - Links to .claude/ for details
 
 ### 4. Enforcement Over Documentation
+
 - Pre-commit hooks (actual enforcement)
 - TypeScript strict mode (compiler enforcement)
 - ESLint complexity limits (automated checks)
 - Not: "Please follow these guidelines" docs
 
 ### 5. Delete Aggressively
+
 - Archive scattered docs (don't delete yet, safety)
 - Consolidate SECURITY_AUDIT.md → .claude/CLAUDE.md
 - Consolidate DEPLOYMENT.md → README.md
@@ -155,6 +169,7 @@ All 4 projects migrated to golden path structure:
 ## Usage
 
 ### For New Projects
+
 ```bash
 cd new-project
 init-project
@@ -162,6 +177,7 @@ init-project
 ```
 
 ### For Existing Projects
+
 ```bash
 cd existing-project
 /audit-structure  # Check compliance
@@ -169,6 +185,7 @@ cd existing-project
 ```
 
 ### After Major Changes
+
 ```bash
 /audit-structure  # Verify still compliant
 ```
@@ -176,6 +193,7 @@ cd existing-project
 ## Next Steps (Optional)
 
 Future enhancements could include:
+
 - [ ] Pre-commit hook template for quality enforcement
 - [ ] Script to sync vibe-coding-setup templates to all projects
 - [ ] /consolidate-docs command to automate doc cleanup
@@ -191,6 +209,7 @@ Future enhancements could include:
 ## Key Insight
 
 The answer was already in "vibe coding" - the user invented it:
+
 - .claude/ for AI memory
 - Minimal docs that stay current
 - Strategic decisions only

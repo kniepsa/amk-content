@@ -32,6 +32,7 @@ Capture fresh screenshots as the new baseline for visual regression testing.
    - /admin at 1920x1080 → ~/.claude/baselines/restaurant-os/admin-desktop.png
 
 4. Report:
+
    ```
    BASELINES UPDATED - [project]
 

@@ -1,6 +1,13 @@
 # Vibe Coding Setup - Next Actions
 
+## Done (2026-01)
+
+- [x] Created entrepreneur-focused Vibe Coding pitch (469 lines, ROI-focused)
+- [x] Installed and configured Gamma MCP Server (@mercuryml/gamma-mcp-server)
+- [x] Created technical Vibe Coding presentation (18 slides)
+
 ## Done (2025-11)
+
 - [x] Created golden path templates (CLAUDE.md, NEXT.md, DEBT.md, README-template.md, .env.example)
 - [x] Created ADR templates in decisions/ folder
 - [x] Updated /init-project command to scaffold full golden path
@@ -10,14 +17,17 @@
 - [x] Created /shipped command (NEXT.md + Notion sync)
 
 ## Now
-- [ ] Test /shipped command on projects
+
+- [ ] Document Gamma MCP workflow for presentations (markdown → Gamma import)
 
 ## Up Next
+
 - [ ] Create /refactor command with code quality personas
 - [ ] Create /review command with security-focused prompts
 - [ ] Add project templates for quick bootstrapping
 
 ## Backlog
+
 - [ ] Create /explain command for teaching/documentation mode
 - [ ] Create /test command with TDD-focused workflow
 - [ ] Add /sync-all command to sync all projects at once

@@ -18,13 +18,13 @@
 
 ### Key Metrics
 
-| Metric | Current | With Starter Kit | Growth |
-|--------|---------|------------------|--------|
-| Restaurant brands | 2 | 12 | 6x |
-| Blog posts/month | 20 | 120 | 6x |
-| Monthly traffic | 20K visits | 120K visits | 6x |
-| Launch time/brand | 1-2 weeks | 3 hours | 95% faster |
-| Setup cost/brand | 80 hours | 3 hours | 96% reduction |
+| Metric            | Current    | With Starter Kit | Growth        |
+| ----------------- | ---------- | ---------------- | ------------- |
+| Restaurant brands | 2          | 12               | 6x            |
+| Blog posts/month  | 20         | 120              | 6x            |
+| Monthly traffic   | 20K visits | 120K visits      | 6x            |
+| Launch time/brand | 1-2 weeks  | 3 hours          | 95% faster    |
+| Setup cost/brand  | 80 hours   | 3 hours          | 96% reduction |
 
 ---
 
@@ -35,6 +35,7 @@
 **Concept**: Launch multiple delivery-only restaurant brands targeting different cuisines and keywords for SEO dominance.
 
 **Economics per Ghost Kitchen**:
+
 - **Setup**: 3 hours (one-time)
 - **Content creation**: 2 hours/month (10 blog posts via AI wizard)
 - **Hosting**: $0 (Vercel hobby plan)
@@ -42,6 +43,7 @@
 - **Ongoing**: 2 hours/month
 
 **Revenue Model**:
+
 - SEO traffic → Order conversions (Uber Eats, Lieferando, Wolt)
 - 10 ghost kitchens × 10 blog posts = 100 posts/month
 - Estimated: 120K monthly visits → 1-2% conversion = 1,200-2,400 orders/month
@@ -81,18 +83,21 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 ```
 
 **Backend**: Restaurant OS
+
 - Centralized CMS for all content
 - Multi-tenant (restaurant_id filtering)
 - REST API endpoints
 - Admin dashboard
 
 **SDK**: `@restaurant-os/sdk` (REQUIRED)
+
 - TypeScript client for API calls
 - Type-safe data fetching
 - Revalidation and caching
 - Used by ALL restaurants
 
 **Frontend**: Two Options
+
 1. **Starter Kit** (OPTIONAL) - Pre-built UI, 3-hour launches
 2. **Custom UI** - Full design control, 1-2 week builds
 
@@ -106,12 +111,14 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 **Deployment**: Vercel (automatic from git)
 
 **Included Pages**:
+
 - Blog listing + detail pages (SEO-optimized)
 - Menu pages (4 sections: Hauptspeisekarte, Getränkekarte, Mittagskarte, Saisonkarte)
 - Events calendar
 - Order page (delivery platform links)
 
 **Customization**:
+
 - Restaurant ID (env var)
 - Theme colors (env var)
 - Logo (replace file)
@@ -167,6 +174,7 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 **Goal**: Validate template works for real ghost kitchen launch
 
 **Steps**:
+
 1. Choose cuisine (e.g., Italian)
 2. Clone template
 3. Configure in 3 hours
@@ -175,6 +183,7 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 6. Measure results (time, quality, SEO)
 
 **Success Criteria**:
+
 - Launch time < 3 hours
 - Lighthouse score 90+
 - No Em Höttche branding visible
@@ -185,6 +194,7 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 **Goal**: Launch 9 more ghost kitchen brands
 
 **Cuisines**:
+
 1. ✅ Italian (Week 3)
 2. Asian Fusion
 3. Mexican
@@ -197,6 +207,7 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 10. Bakery/Desserts
 
 **Process per Brand** (2 hours):
+
 - Clone template (5 min)
 - Configure `.env.local` (10 min)
 - Replace logo (10 min)
@@ -209,6 +220,7 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 ### Phase 4: Measure & Optimize (Month 2+)
 
 **Metrics to Track**:
+
 - Organic traffic per brand
 - Conversion rate (visits → orders)
 - Blog post ranking (top 10 positions)
@@ -216,6 +228,7 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 - Customer acquisition cost
 
 **Optimization**:
+
 - Kill underperforming brands
 - Double down on winners
 - A/B test blog topics
@@ -235,13 +248,13 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 
 ### vs. Alternatives
 
-| Solution | Launch Time | Cost | SEO Quality | Customization |
-|----------|-------------|------|-------------|---------------|
-| **Starter Kit** | 3 hours | $0 | Excellent | Theme only |
-| Custom build | 1-2 weeks | $2,000-$4,000 | Variable | Full |
-| Wix/Squarespace | 1 day | $20/mo | Poor | Limited |
-| WordPress + theme | 2-3 days | $100-$500 | Good | Medium |
-| No-code builder | 1-2 days | $50/mo | Poor | Limited |
+| Solution          | Launch Time | Cost          | SEO Quality | Customization |
+| ----------------- | ----------- | ------------- | ----------- | ------------- |
+| **Starter Kit**   | 3 hours     | $0            | Excellent   | Theme only    |
+| Custom build      | 1-2 weeks   | $2,000-$4,000 | Variable    | Full          |
+| Wix/Squarespace   | 1 day       | $20/mo        | Poor        | Limited       |
+| WordPress + theme | 2-3 days    | $100-$500     | Good        | Medium        |
+| No-code builder   | 1-2 days    | $50/mo        | Poor        | Limited       |
 
 ---
 
@@ -250,6 +263,7 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 ### Year 1 (10 Ghost Kitchens)
 
 **Revenue** (Conservative):
+
 - 10 brands × 10K visits/month = 100K visits/month
 - 1% conversion = 1,000 orders/month
 - €25 average order = €25,000 GMV/month
@@ -257,6 +271,7 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 - **Annual**: €45,000
 
 **Revenue** (Optimistic):
+
 - 10 brands × 12K visits/month = 120K visits/month
 - 2% conversion = 2,400 orders/month
 - €30 average order = €72,000 GMV/month
@@ -264,12 +279,14 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 - **Annual**: €311,040
 
 **Costs**:
+
 - Setup (10 brands × 3 hours × €50/hour): €1,500 (one-time)
 - Content (10 brands × 2 hours/month × €50/hour × 12 months): €12,000
 - Hosting: €0 (Vercel hobby plan)
 - Total Year 1: €13,500
 
 **Profit**:
+
 - Conservative: €45,000 - €13,500 = €31,500 (233% ROI)
 - Optimistic: €311,040 - €13,500 = €297,540 (2,204% ROI)
 
@@ -278,12 +295,14 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 **Strategy**: Expand to 5 cities × 10 cuisines = 50 brands
 
 **Revenue** (Conservative):
+
 - 50 brands × 8K visits/month = 400K visits/month
 - 1% conversion = 4,000 orders/month
 - €25 average = €100,000 GMV/month
 - **Annual**: €1,200,000 GMV → €180,000 commission revenue
 
 **Costs**:
+
 - Setup (40 new brands × 3 hours × €50): €6,000
 - Content (50 brands × 2 hours/month × €50 × 12): €60,000
 - Hosting (Vercel Pro): €240/year
@@ -356,12 +375,12 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 
 ## Timeline Summary
 
-| Phase | Duration | Deliverable | Status |
-|-------|----------|-------------|--------|
-| Phase 1: Template Extraction | Week 1-2 | Starter template repo | 🔄 Step 1/6 |
-| Phase 2: Test Ghost Kitchen #1 | Week 3 | First ghost kitchen live | ⏳ Pending |
-| Phase 3: Scale to 10 Brands | Week 4 | 10 ghost kitchens live | ⏳ Pending |
-| Phase 4: Optimize & Grow | Month 2+ | 6x traffic achieved | ⏳ Pending |
+| Phase                          | Duration | Deliverable              | Status      |
+| ------------------------------ | -------- | ------------------------ | ----------- |
+| Phase 1: Template Extraction   | Week 1-2 | Starter template repo    | 🔄 Step 1/6 |
+| Phase 2: Test Ghost Kitchen #1 | Week 3   | First ghost kitchen live | ⏳ Pending  |
+| Phase 3: Scale to 10 Brands    | Week 4   | 10 ghost kitchens live   | ⏳ Pending  |
+| Phase 4: Optimize & Grow       | Month 2+ | 6x traffic achieved      | ⏳ Pending  |
 
 **Current Status**: Phase 1 Step 1 in progress (repository created, file extraction next)
 
@@ -388,21 +407,25 @@ Backend (Restaurant OS) → SDK (Data Layer) → Frontend (Starter Kit OR Custom
 ## Next Actions
 
 **Immediate** (Day 1-2):
+
 1. Complete Phase 1 Step 1: Copy files from Em Höttche
 2. Install dependencies (SDK, next-intl, shadcn/ui)
 3. Verify pages load correctly
 
 **Short-term** (Week 1-2):
+
 1. Complete Steps 2-6 (configuration, branding, docs)
 2. Test build process
 3. Deploy to Vercel
 
 **Medium-term** (Week 3-4):
+
 1. Launch Ghost Kitchen #1
 2. Validate 3-hour launch time
 3. Scale to 10 brands
 
 **Long-term** (Month 2+):
+
 1. Measure traffic growth
 2. Optimize conversion rates
 3. Expand to new cities

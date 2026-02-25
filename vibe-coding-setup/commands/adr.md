@@ -10,16 +10,20 @@ Create an Architecture Decision Record:
    - **Consequences**: What does this mean? (1-2 bullet points)
 
 4. Create `.claude/decisions/[NUMBER]-[slug].md`:
+
    ```markdown
    # [NUMBER]: [Title]
 
    ## Context
+
    [Why this decision was needed]
 
    ## Decision
+
    [What we chose]
 
    ## Consequences
+
    - [Consequence 1]
    - [Consequence 2]
    ```

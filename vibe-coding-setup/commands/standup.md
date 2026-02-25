@@ -5,6 +5,7 @@ Quick standup summary: yesterday, today, blockers.
 ## Instructions
 
 1. **What I did yesterday** - Get from git log:
+
    ```bash
    git log --since="yesterday" --until="today" --oneline --author="$(git config user.name)" 2>/dev/null || git log -5 --oneline
    ```

@@ -5,6 +5,7 @@ Comprehensive health check for the BMAD + Vibe-Coding + AgentVibes unified ecosy
 ## Checks to Perform
 
 ### 1. BMAD Method (BMM) Status
+
 ```
 Check: .bmad/_cfg/manifest.yaml exists
 Check: .bmad/bmm/agents/ contains agent files
@@ -18,6 +19,7 @@ Report:
 ```
 
 ### 2. Vibe-Coding Setup
+
 ```
 Check: .claude/CLAUDE.md exists (project memory)
 Check: .claude/NEXT.md exists OR docs/sprint-status.yaml exists
@@ -31,6 +33,7 @@ Report:
 ```
 
 ### 3. AgentVibes TTS
+
 ```
 Check: .claude/hooks/play-tts.sh exists and executable
 Check: .claude/hooks/session-start-tts.sh exists
@@ -47,6 +50,7 @@ Report:
 ```
 
 ### 4. Git Hooks
+
 ```
 Check: .husky directory exists
 Check: .husky/pre-commit exists (lint-staged)
@@ -60,6 +64,7 @@ Report:
 ```
 
 ### 5. Integration Health
+
 ```
 Check: Agent context file (.claude/agent-context.json)
 Check: Voice mapping file readable
@@ -72,6 +77,7 @@ Report:
 ```
 
 ### 6. MECE Validation
+
 ```
 Verify no responsibility overlaps:
 - Task tracking: NEXT.md XOR sprint-status.yaml (not both actively used)
@@ -122,6 +128,7 @@ Recommended actions:
 ## Quick Mode
 
 For a shorter report, just check critical systems:
+
 ```
 /audit-ecosystem quick
 

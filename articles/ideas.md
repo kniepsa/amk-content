@@ -1723,6 +1723,23 @@
 - Pattern: Atomic task decomposition → parallel spawn → validation layer → integration test → ship
   **Presentation potential**: YES — concrete numbers + workflow diagram + before/after code quality
 
+## 2026-02-26 - Clawbot vs Trigger.dev vs N8N: The 2026 Automation Stack Decision Framework
+
+**Category**: Strategy | Tools
+**Hook**: Three automation tools. Developers are arguing about which one wins. They're all asking the wrong question.
+**Key points**:
+
+- The real question isn't "which tool is best" — it's "who owns this after I build it?"
+- Clawbot = computer-use agent (UI, legacy software, no-API tasks, messaging interface) — best-effort, ad-hoc
+- Trigger.dev = code-first background jobs + AI agent loops (durable, retries, queues, CI/CD-friendly)
+- N8N = visual workflows for non-technical operators (400+ pre-auth'd OAuth connectors, ops teams own it)
+- Framework: 3 axes — who maintains it (dev/non-dev), does it need computer use (UI/API), reliability required (best-effort/durable)
+- The complementary pattern: Clawbot (trigger + judgment) → Trigger.dev (reliable execution) → Clawbot (report back)
+- N8N's real moat in 2026: 400+ pre-built OAuth connectors (Salesforce, HubSpot, QuickBooks) — hours to build correctly even with Claude Code
+- Community consensus: developers switching to Trigger.dev for code-heavy workflows; N8N holding for ops teams
+
+**Presentation potential**: YES — clear framework, non-obvious take, covers all three tools people are comparing
+
 ## 2026-02-26 - The npm Package Name Trap That Blocked Trigger.dev v4 Deploy
 
 **Category**: Vibe Coding

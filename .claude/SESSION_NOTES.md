@@ -1,3 +1,52 @@
+# Session: 2026-02-26 - OpenClaw Deep-Dive + Stack Updates
+
+## What We Accomplished
+
+### 1. OpenClaw / Clawbot Research
+
+- Watched + summarized Greg Eisenberg × Nick podcast on making money with OpenClaw
+- Researched 25+ real use cases people are running (business automation, freelance/Upwork, content, sub-agents)
+- Key finding: 5,705 community skills on ClawHub; 386 malicious ones found Feb 2026 — vet before installing
+- Creator: Peter Steinberger joined OpenAI Feb 14; project moved to open-source foundation
+
+### 2. Automation Stack Decision Framework
+
+- Clawbot vs Trigger.dev vs N8N decision framework developed
+- Clawbot: computer-use/UI, messaging interface, best-effort
+- Trigger.dev: code-first, durable, AI agent loops with Claude Agent SDK
+- N8N: non-technical operators, 400+ pre-auth'd OAuth connectors, visual debugging
+- Key rule: "who maintains it after you build it?" → non-dev = N8N, dev = Trigger.dev
+
+### 3. Trigger.dev AI Agents
+
+- Confirmed: yes, you can build Clawbot-style decision loops on Trigger.dev
+- Two approaches: Claude Agent SDK (`query()` loop) or Vercel AI SDK (`generateText` + `maxSteps`)
+- Trigger.dev adds: durable execution, retries, queues, human-in-the-loop gates
+
+### 4. Stack Updates (/last30days)
+
+- Next.js 16: 6 breaking changes documented (middleware→proxy, revalidateTag signature, serverRuntimeConfig removed, next lint removed, parallel routes default.js required, Node 18 dropped)
+- Vercel: now.json removed March 31 2026
+- Supabase: pg_graphql disabled by default on new projects
+
+## Committed
+
+- `553ae4e` — docs: add Trigger.dev v4 npm package name trap article idea
+
+## Context for Future Sessions
+
+- Next.js 16 gotchas added to ~/.claude/CLAUDE.md
+- Article idea added: "Clawbot vs Trigger.dev vs N8N: The 2026 Automation Stack Decision Framework"
+- OpenClaw ban wave on Upwork — ToS risk for the "Upwork automation" angle
+
+## Session Metrics
+
+- Commits: 2 (session-end from previous + new article idea)
+- Gotchas added: 9 (6 Next.js 16, 1 automation tools, 1 Vercel, 1 Supabase)
+- Article ideas added: 2 (Clawbot framework + Trigger.dev npm trap — was already committed)
+
+---
+
 # Session: 2026-02-25 - Vibe Coding Setup V3 Targeted Improvements + Ship
 
 ## What We Accomplished

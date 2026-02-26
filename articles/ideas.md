@@ -1722,3 +1722,16 @@
 - Result: 53 files changed, 4,119 insertions, 5,480 deletions in one session
 - Pattern: Atomic task decomposition → parallel spawn → validation layer → integration test → ship
   **Presentation potential**: YES — concrete numbers + workflow diagram + before/after code quality
+
+## 2026-02-26 - The npm Package Name Trap That Blocked Trigger.dev v4 Deploy
+
+**Category**: Vibe Coding
+**Hook**: The v4 CLI package has a completely different name — and nobody tells you until you waste time debugging.
+**Key points**:
+
+- `@trigger.dev/cli@latest` = downloads v2 (3.3.12, deprecated). Has no `deploy` command.
+- `trigger.dev@latest` = the actual v4 CLI. Unscoped package, same version as the SDK.
+- Same pattern exists in other ecosystems: a major version bump = different npm package name
+- Rule: When "latest" breaks, check if the major version changed the package name
+- Broader lesson: Always check `npm info [package] dist-tags` to see all available tags
+  **Presentation potential**: No — too narrow

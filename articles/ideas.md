@@ -1,5 +1,53 @@
 # Content Ideas
 
+## 2026-02-26 - Creator Directories: The Distribution Hack Nobody Talks About
+
+**Category**: GTM | Strategy | Directories
+**Hook**: The #1 problem with directories is distribution. Influencers have it. Here's how to combine both — and build a $5k/month passive asset in 4 days.
+**Key points**:
+
+- Directories fail because SEO takes 6+ months — influencer launch = day-1 traffic
+- Build unasked, pitch finished: "I built your directory" converts better than any pitch deck
+- Multi-tenant Astro monorepo = new creator directory in 1 day (proven architecture)
+- Crawl4AI enriches creator content (YouTube descriptions, newsletters, resource pages) into structured data
+- Revenue: affiliate links (immediate) + featured listings (month 2+) + lead gen (B2B niche)
+- Revenue split 50/50: creator brings audience, you bring tech + data pipeline
+  **Presentation potential**: YES — actionable, specific, combines hot topics (AI + creator economy + passive income)
+
+---
+
+## 2026-02-26 - Astro vs Next.js for Directories: Why I Switched
+
+**Category**: Architecture | Vibe Coding
+**Hook**: I had 25,000 programmatic SEO pages to build. Next.js choked. Astro shipped in minutes. Here's the decision framework.
+**Key points**:
+
+- Directories are read-heavy, static-first — React hydration is pure overhead
+- Astro: zero JS by default, perfect Core Web Vitals, content collections with Zod validation
+- Next.js wins only for: heavy auth, real-time data, complex server actions
+- Astro multi-tenant monorepo pattern (Turborepo): one codebase, N directories, each with own domain/branding
+- Programmatic pages → 25k static HTML pages, built in minutes
+- Content Collections = type-safe data layer without a database
+  **Presentation potential**: YES — practical architecture decision many vibe coders face
+
+---
+
+## 2026-02-26 - When Turbopack Puts Your Password in the URL
+
+**Category**: Vibe Coding | Architecture
+**Hook**: Your Next.js login page suddenly leaks credentials into the URL bar. No code changed. What's happening — and the 3-line fix.
+**Key points**:
+
+- Root cause: multiple lockfiles (`~/package-lock.json` + project root) confuse Turbopack workspace root detection
+- HMR module factory corruption → hydration fails → React never attaches onSubmit → browser falls back to native GET form submit
+- `method="post"` alone isn't enough: form without `action` inherits current URL's query params (stale credentials reappear in POST URL)
+- Fix 1: `experimental.turbo.root: path.resolve(__dirname)` in next.config.ts
+- Fix 2: always `action="/login"` on auth forms
+- Bonus: how to find/kill stale next-server processes squatting on ports
+  **Presentation potential**: YES — every Next.js dev has hit mysterious hydration failures
+
+---
+
 ## 2026-02-25 - The Vibe Coder's Terminal Setup (Claude Code Status Line + Terminal Choice)
 
 **Category**: Vibe Coding | Tools
@@ -1625,6 +1673,42 @@
 - Wrong framing: "Peter is very bullish, wants to partner" = reveals Peter's desperation
 - Right framing: "Peter excited about platform (true). I think three-way makes strategic sense (protects Peter)."
 - Cialdini scoring: Scarcity (60-90 day window), Authority (60K clients), Social Proof (8 parties), Urgency (platform owners vs suppliers), Reciprocity (offering partnership structure), Liking (worked with Peter years)
+
+## 2026-02-26 - Influencer Editions: The Creator Merch Model Nobody Has Built Yet
+
+**Category**: Strategy | GTM
+**Hook**: Standard creator merch has a fatal flaw — every fan gets the same thing. What if every fan got something unique that still looked unmistakably like the creator's product?
+**Key points**:
+
+- The insight: "mass production" vs "mass customization" — dual ownership psychology (mine AND theirs)
+- Sector system: locked sectors (creator brand) + customizable sectors (fan identity)
+- Viral loop: fan shares mockup preview before buying → others see it → "wait, mine can say MY name?"
+- Business model: 40-60% price premium with no cost increase (R250 → R350 notebook)
+- SA competitive advantage: 3-day shipping (vs 3-week global), Yoco checkout, ZAR pricing, WhatsApp
+- Platform + killer app strategy: Influencer Editions (consumer-facing) built on Customization Layer API (B2B infra)
+- Validation sprint: manual sectors config → dead-simple UI → 10 orders by hand → before writing API code
+
+**Presentation potential**: YES — novel product concept, clear business model, SA-specific angle, viral mechanics
+
+---
+
+## 2026-02-26 - How We Decided to Pivot from Dying to Growing (The Printulu POD Strategy)
+
+**Category**: Strategy
+**Hook**: Revenue down 8.4% while the market declines 33% globally. The diagnosis: you're not in a dying business, you're in the WRONG business. Here's the framework we used to figure out where to go.
+**Key points**:
+
+- Root cause attribution: 70% market shift, 20% platform blocker, 10% execution gaps
+- The matrix: traditional print (-33% CAGR) vs POD (+25% CAGR $8.93B → $58B)
+- MLP vs MVP distinction: higher bar, emotional connection, viral mechanics baked in
+- "Don't build the API first" — validate manually, fulfill first 10 orders by hand
+- Decision gate: if 2 of 3 pilot creators re-order AND refer → build the system
+- Africa creator economy: $5.1B (2025) → $29.84B (2032) at 28.7% CAGR
+- Brand architecture: sub-brand now ("Merch by Printulu"), new consumer brand when POD > 50%
+
+**Presentation potential**: YES — replicable pivot framework + concrete SA market data
+
+---
 
 ## 2026-02-25 - Parallel Agent Sprint: Ship a Week of Work in 2 Hours
 

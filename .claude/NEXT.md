@@ -6,6 +6,12 @@ _No active task. Run /warmup to start._
 
 ## Backlog
 
+- [ ] Directories: run `import-to-content-collection.ts` to import 161 missing businesses (348 scraped, 187 imported)
+- [ ] Directories: Google-search 336 businesses without websites → find URLs → Crawl4AI enrichment
+- [ ] Directories: Add FAQPage + BreadcrumbList + ItemList schema markup to comparison/category pages
+- [ ] Directories: Bonn — scrape real restaurant data (Crawl4AI + Google Maps, target 50-100)
+- [ ] Directories: Sindelfingen — decide on one focused niche (not multi-category)
+- [ ] Creator Directories — build demo for one creator unasked, then pitch
 - [ ] Test /install multi-app flow on a real business (Printulu or Bonn Gastro)
 - [ ] Update README.md to reflect current V3 structure
 - [ ] Sync new gotchas from vibe-coding-setup/CLAUDE.md → ~/.claude/CLAUDE.md (4 new: context 70%, .claudeignore, two-correction rule, interview pattern)

@@ -182,6 +182,10 @@ damage-control, notion-reminder (progress check), session-start, statusline
 
 hooks/security-scan.sh, hooks/quality-batch.sh, hooks/quality-summary.sh, settings.json
 
+### Templates (`templates/execution/`)
+
+memory_ops.py
+
 ### Distribution
 
 VERSION (semantic version), .registry (installed project paths)

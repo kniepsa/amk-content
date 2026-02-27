@@ -77,7 +77,17 @@ TAGS: [#tag1 #tag2 #tag3]
 
 Common tags: `#rls #auth #server-components #server-actions #caching #types #migration #edge-runtime #shadcn`
 
-### Step 5: Write to learnings.md
+### Step 5: Write to SQLite Memory (if available)
+
+If `execution/memory_ops.py` and `db/memory.db` exist:
+
+```bash
+python3 execution/memory_ops.py add-learning "<skill-name>" "<YYYY-MM-DD: pattern content>"
+```
+
+This persists the pattern in queryable SQLite — survives context compaction, searchable by future sessions.
+
+### Step 6: Write to learnings.md
 
 Append the entry to `.claude/learnings.md` in the current project:
 
@@ -109,7 +119,7 @@ Each entry generalizes a specific fix into a reusable pattern.
 ---
 ```
 
-### Step 6: Offer Gotcha Promotion
+### Step 7: Offer Gotcha Promotion
 
 If the pattern is universal (applies beyond this project):
 

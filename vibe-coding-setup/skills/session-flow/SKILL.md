@@ -209,11 +209,18 @@ This handles staging, commit, push, PR (if feature branch), and deployment.
 
 **Action**: Run the `/session-end` command.
 
+**Memory** (if `execution/memory_ops.py` and `db/memory.db` exist):
+
+```bash
+python3 execution/memory_ops.py log-run "session" "success" --notes "<what was accomplished this session>"
+```
+
 **Validation Gate**:
 
 - [ ] Session-end completed successfully
 - [ ] Gotchas captured (if any)
 - [ ] NEXT.md updated
+- [ ] Memory logged (if memory layer present)
 
 **TTS**: `"Session complete. Insights captured. Safe to clear."`
 

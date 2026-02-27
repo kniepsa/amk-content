@@ -29,6 +29,16 @@ REPRODUCE --> ISOLATE --> HYPOTHESIZE --> FIX --> VERIFY --> DOCUMENT --> SHIP
 
 ---
 
+## Memory
+
+If `execution/memory_ops.py` and `db/memory.db` exist in this project:
+
+- **Before REPRODUCE**: `python3 execution/memory_ops.py search "<error-keywords>"` — check if this bug or root cause has been seen before.
+- **After DOCUMENT**: `python3 execution/memory_ops.py log-run "debug-chain" "success" --notes "<root cause, fix applied>"`
+- **Also log the learning**: `python3 execution/memory_ops.py add-learning "debug-chain" "<YYYY-MM-DD: what caused it, how fixed>"`
+
+---
+
 ## Phase 1: REPRODUCE
 
 **Goal**: Confirm the bug exists and can be triggered reliably.

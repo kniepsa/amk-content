@@ -58,6 +58,15 @@ Phase 7: LEARN    -----> [complete]
 
 ---
 
+## Memory
+
+If `execution/memory_ops.py` and `db/memory.db` exist in this project:
+
+- **Before CLARIFY**: `python3 execution/memory_ops.py search "<feature-keywords>"` — surface past runs, decisions, and gotchas relevant to this feature.
+- **After LEARN**: `python3 execution/memory_ops.py log-run "dev-pipeline" "success" --notes "<what was built, key decisions made>"`
+
+---
+
 ## Phase 1: CLARIFY
 
 **Goal**: Understand what we are building and why.

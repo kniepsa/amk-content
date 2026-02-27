@@ -1,3 +1,53 @@
+# Session: 2026-02-27 - SQLite Memory Layer for Vibe Coding Setup
+
+## What We Accomplished
+
+### 1. Implemented Nick Saraev's SQLite Memory Layer
+
+Added full execution memory to vibe-coding-setup V3 so every project can accumulate real knowledge about itself across sessions.
+
+**New files:**
+
+- `templates/execution/memory_ops.py` — 9-command CLI (init, log-run, get-runs, search, add-entity, add-observation, read-graph, add-learning, get-learnings)
+- `templates/.claude/db/.gitkeep` — placeholder for `db/` directory
+- `templates/.gitignore` — `db/memory.db` + `.tmp/` entries
+
+**Modified files:**
+
+- `commands/init-memory.md` — steps 8-9: copy memory_ops.py + python init + gitignore
+- `hooks/session-start.sh` — injects last 3 runs at session start if memory exists
+- `commands/sync-vibe-setup.md` — push now includes `templates/execution/` → `~/.claude/templates/execution/`
+- `skills/dev-pipeline/SKILL.md` — search before CLARIFY, log-run after LEARN
+- `skills/debug-chain/SKILL.md` — search before REPRODUCE, log-run + add-learning after DOCUMENT
+- `skills/learn/SKILL.md` — Step 5: write to SQLite before learnings.md
+- `skills/session-flow/SKILL.md` — log-run "session" at CLOSE
+
+### 2. Key Architectural Decisions
+
+- Memory layer is **opt-in** — `/install` doesn't auto-add it; use `/init-memory` per project
+- DB lives at `db/memory.db` relative to CWD (where Claude Code sessions are opened from)
+- **Hub-level for multi-app businesses** — one shared memory > N per-project DBs
+- `sync-vibe-setup push` gap fixed — execution templates now included
+
+## Committed
+
+Nothing committed this session (file edits only — no push)
+
+## Context for Future Sessions
+
+- Run `/sync-vibe-setup push` to deploy memory layer to `~/.claude/templates/`
+- Then `/init-memory` in each project (or hub) where you want execution memory
+- Printulu: run at hub level, not individual sub-repos
+
+## Session Metrics
+
+- Files created: 3
+- Files modified: 7 (6 vibe-coding-setup + sync command)
+- Gotchas: sync-vibe-setup gap (fixed in same session)
+- Article ideas: 1 (self-annealing AI / SQLite memory)
+
+---
+
 # Session: 2026-02-26 - OpenClaw Deep-Dive + Stack Updates
 
 ## What We Accomplished

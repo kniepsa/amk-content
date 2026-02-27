@@ -58,4 +58,10 @@ echo "Last commit: $LAST_COMMIT"
 mkdir -p "$HOME/.claude/quality-state"
 touch "$HOME/.claude/quality-state/last-progress-check"
 
+# Check execution memory for recent project context
+if [ -f "$PROJECT_DIR/execution/memory_ops.py" ] && [ -f "$PROJECT_DIR/db/memory.db" ]; then
+  echo "=== Recent Memory ==="
+  python3 "$PROJECT_DIR/execution/memory_ops.py" get-runs --limit 3 2>/dev/null || true
+fi
+
 exit 0

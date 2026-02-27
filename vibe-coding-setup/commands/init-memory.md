@@ -53,4 +53,20 @@ Initialize vibe coding memory for this project:
 7. Symlink global post-commit hook if git repo:
    `ln -sf ~/.claude/hooks/post-commit.mjs .git/hooks/post-commit`
 
+8. Initialize execution memory:
+
+   ```
+   mkdir -p execution db
+   cp ~/.claude/templates/execution/memory_ops.py execution/memory_ops.py
+   python3 execution/memory_ops.py init
+   ```
+
+   → Creates `db/memory.db` with full schema (entities, observations, relations, directive_runs, learnings)
+
+9. Add to project `.gitignore`:
+   ```
+   db/memory.db
+   .tmp/
+   ```
+
 Keep everything lean. Total lines < 60.

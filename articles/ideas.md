@@ -1,5 +1,38 @@
 # Content Ideas
 
+## 2026-02-27 - The Self-Annealing AI: Give Claude a SQLite Memory That Survives Context Resets
+
+**Category**: Vibe Coding | Tools
+**Hook**: Claude forgets everything when you `/clear`. What if it didn't? One Python script + SQLite gives your AI pair programmer persistent project memory that compounds over time.
+**Key points**:
+
+- The problem: Claude's "memory" is just the current context window — cleared every session
+- Nick Saraev's pattern: `db/memory.db` + `memory_ops.py` script living inside the project
+- Self-annealing loop: check memory before → execute → log outcome after → errors don't repeat
+- 5 tables: entities, observations, relations, directive_runs, learnings
+- Skills query memory before running: `search "auth"` before debugging auth → surface past root causes
+- Session-start hook: last 3 runs injected automatically at the top of every new session
+- Opt-in per project: hub-level for multi-app businesses (cross-cutting patterns)
+- Zero external deps: pure stdlib Python, works offline, gitignored .db
+  **Presentation potential**: YES — concrete, immediately implementable, addresses a real pain point every Claude Code user feels
+
+---
+
+## 2026-02-27 - vibe.md: Das fehlende Config-File für Claude Code Projekte
+
+**Category**: Vibe Coding | Tools
+**Hook**: Jedes Projekt hat seine eigene Energie. Warum nicht Claude das auch wissen lassen? Ein 30-Zeilen-File das dein AI Pair Programming transformiert.
+**Key points**:
+
+- CLAUDE.md = was das Projekt ist; vibe.md = wie Claude sich verhalten soll
+- Übersetzungsmatrix für kurze Befehle ("effizient" = kein Overthinking, direkt handeln)
+- Override commands (/focus, /vibe) für Kontextwechsel
+- Sprachautodetektion (DE/EN response je nach Input)
+- Pattern: Behavior config getrennt von Architecture docs
+  **Presentation potential**: YES — kurz, konkret, sofort nachmachbar
+
+---
+
 ## 2026-02-26 - Creator Directories: The Distribution Hack Nobody Talks About
 
 **Category**: GTM | Strategy | Directories
@@ -1752,3 +1785,51 @@
 - Rule: When "latest" breaks, check if the major version changed the package name
 - Broader lesson: Always check `npm info [package] dist-tags` to see all available tags
   **Presentation potential**: No — too narrow
+
+## 2026-02-26 - The Hidden Email Problem: Why Your "Dormant" Customers Show Zero Results
+
+**Category**: Strategy | Tools
+**Hook**: You filtered for dormant customers. It showed 0. Panic. Turns out they're all there — just invisible.
+**Key points**:
+
+- Email validation tables + sendable filter create a silent trap: unvalidated = invisible (shows 0, not "hidden")
+- The fix isn't just showing all emails — it's telling the user "32 hidden" with one-click escape hatch
+- Two-count SQL pattern: `COUNT(DISTINCT CASE WHEN sendable_condition THEN id END)` vs `COUNT(DISTINCT id)` in one query
+- Domain-level dormancy quirk: one person at acme.com orders → all 10 acme.com contacts become "ACTIVE" in the tag system
+- The 14k vs actual dormant count discrepancy: 0-order customers were never dormant (code-protected), gap is likely domain grouping or Techtulu vs Vendure customer base
+- Broader pattern: "shows 0" UX almost always means "filtered to 0" not "actually 0" — surface the difference
+
+**Presentation potential**: No — too product-specific
+
+## 2026-02-26 - LinkedIn Automation Without Getting Banned: Gaussian Delays vs Uniform Delays
+
+**Category**: Tools | Architecture
+**Hook**: Uniform random delays get LinkedIn accounts banned. Gaussian distribution (Box-Muller) mimics human behavior. Here's why and how to implement it in 30 lines of TypeScript.
+**Key points**:
+
+- LinkedIn's 2026 detection is behavior-based (acceptance rate velocity + timing patterns), NOT signature-based
+- Uniform `Math.random()` delays are detectable — too symmetric. Gaussian mirrors human variance
+- Box-Muller transform: pure TypeScript, zero npm deps, 10 lines of code
+- Session windows matter: 08:30-11:30 and 13:00-17:30 (no after-hours automation)
+- Kill switch at 20% acceptance rate — if people aren't accepting, stop before LinkedIn flags the account
+- Warm-up schedule: Week 1 = 5 connections/day, Week 4+ = 20/day
+- Customer stagger: trigger each customer's sequence 8±3 min apart (gaussian) — prevents burst patterns
+- Trigger.dev `concurrencyLimit: 3` on the orchestrator keeps 3 customers active simultaneously
+
+**Presentation potential**: Yes — applicable to any social automation (Twitter/X, LinkedIn, email)
+
+## 2026-02-27 - Always-On Campaigns: Moving From Broadcasts to Living Loops
+
+**Category**: Strategy | Architecture
+**Hook**: One-shot email blasts are dead. Here's how to build campaigns that grow with your customer base automatically.
+**Key points**:
+
+- Broadcast model: frozen audience at creation time — misses everyone who enters segment tomorrow
+- Dynamic model: cron task every 15 min checks for new segment members + enrolls them
+- Three primitives: `audience_mode` (snapshot|dynamic), `enrollment_delay_hours`, `growth_campaign_enrollments` dedup guard
+- Deduplication is the hard part: UNIQUE(campaign_id, customer_id) + ON CONFLICT DO NOTHING = idempotent at scale
+- `scheduled_for` column = delay execution without a separate scheduler — just a WHERE guard in the send query
+- Business impact: WELCOME sequence fires automatically for every new customer — zero ops overhead after setup
+- Broader pattern: move from "run now" thinking to "always checking" thinking for growth automation
+
+**Presentation potential**: Yes — simple mental model shift, applicable to any SaaS product with email automation

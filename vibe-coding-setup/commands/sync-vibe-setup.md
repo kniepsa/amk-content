@@ -44,6 +44,13 @@ mkdir -p "$TARGET/templates/.claude/hooks"
 cp "$SOURCE/templates/.claude/hooks/"*.sh "$TARGET/templates/.claude/hooks/"
 cp "$SOURCE/templates/.claude/settings.json" "$TARGET/templates/.claude/settings.json"
 
+# Templates - copy execution scripts (memory layer)
+mkdir -p "$TARGET/templates/execution"
+cp "$SOURCE/templates/execution/"*.py "$TARGET/templates/execution/"
+
+# Templates - copy gitignore additions
+cp "$SOURCE/templates/.gitignore" "$TARGET/templates/.gitignore"
+
 # Make all hook scripts executable
 chmod +x "$TARGET/hooks/"*.sh
 chmod +x "$TARGET/templates/.claude/hooks/"*.sh

@@ -52,21 +52,24 @@ Companion reference for the dev-pipeline skill. Each phase includes what success
 
 ### Common Pitfalls
 
+- **Not running `/approach` first** — jumping into design without choosing build mode causes UI ↔ Backend churn
 - Over-engineering for hypothetical scale
 - Missing RLS policies in data model
 - Forgetting loading/error/empty states
 - Not checking existing code for reusable patterns
 - Building when a library exists (check shadcn/ui first)
+- **Starting UI before schema is stable** — every schema migration breaks UI simultaneously
 
 ### Tools and Commands
 
-| Tool               | Purpose                                      |
-| ------------------ | -------------------------------------------- |
-| `/pm`              | Product brief creation                       |
-| `/architect`       | System design                                |
-| `/strategy`        | Multi-persona strategic analysis (if needed) |
-| `/advisory-debate` | 5-expert deliberation (for major decisions)  |
-| context7 MCP       | Framework docs, best practices               |
+| Tool               | Purpose                                                      |
+| ------------------ | ------------------------------------------------------------ |
+| `/approach`        | Select build mode (UX-first/Schema-first/Bot-first/Parallel) |
+| `/pm`              | Product brief creation                                       |
+| `/architect`       | System design                                                |
+| `/strategy`        | Multi-persona strategic analysis (if needed)                 |
+| `/advisory-debate` | 5-expert deliberation (for major decisions)                  |
+| context7 MCP       | Framework docs, best practices                               |
 
 ### PM Brief Checklist
 
@@ -79,12 +82,25 @@ Companion reference for the dev-pipeline skill. Each phase includes what success
 
 ### Architecture Checklist
 
+- [ ] Build mode selected via `/approach` (UX-First / Schema-First / Bot-First / Parallel)
 - [ ] Data model with entities and relations
 - [ ] API endpoints listed with methods
 - [ ] Component structure outlined
 - [ ] Edge cases documented (empty/error/loading)
 - [ ] Dependencies identified (existing + new)
 - [ ] Files to create/modify listed
+
+### Schema-Freeze Gate (Schema-First + Parallel modes only)
+
+Before advancing to PLAN, verify:
+
+- [ ] Core entities defined (tables + fields)
+- [ ] Relations defined (FK constraints)
+- [ ] RLS policies drafted
+- [ ] No schema migrations planned in next 2 sessions
+- [ ] Schema unchanged since last session
+
+Gate OPEN? → proceed to PLAN. Gate CLOSED? → return to `/architect` until stable.
 
 ---
 

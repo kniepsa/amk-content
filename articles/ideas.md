@@ -1833,3 +1833,63 @@
 - Broader pattern: move from "run now" thinking to "always checking" thinking for growth automation
 
 **Presentation potential**: Yes — simple mental model shift, applicable to any SaaS product with email automation
+
+## 2026-02-28 - Free SEO Stack for Static Sites in 30 Minutes
+
+**Category**: Tools | Architecture
+**Hook**: Your static site has no sitemap, no og-image, and Google can't find you. Here's the full free SEO setup I run on every new site — done before the first cup of coffee.
+**Key points**:
+
+- `@astrojs/sitemap` + `site:` config = automatic sitemap at build time (zero maintenance)
+- og-image without a designer: Playwright screenshot of your hero at 1200×630 → committed to `public/`
+- Twitter Card + JSON-LD `hasOfferCatalog` = rich results for local service businesses
+- Google Maps embed (no API key) = local SEO trust signal + visual anchor on the page
+- robots.txt is 3 lines — just do it
+- Total cost: €0. Total time: 30 min. SEO value: measurable in Search Console within 2 weeks
+
+**Presentation potential**: Yes — live-coding format, satisfying checklist completion
+
+## 2026-02-28 - Cialdini für Handwerker-Websites: 7 Prinzipien, 1 Stunde, mehr Anfragen
+
+**Category**: Strategy | GTM
+**Hook**: Dein Handwerker-Kollege hat die bessere Website — nicht weil er mehr bezahlt hat, sondern weil er Psychologie benutzt.
+**Key points**:
+
+- Autorität: Berufstitel als H1 ("Fliesenleger. Komplettsanierer.") schlägt Verben in Conversion
+- Social Proof: Jedes Testimonial soll einen anderen Angst-Trigger bedienen (Preis / Sauberkeit / Pünktlichkeit)
+- Reziprozität: "Kostenloses Festpreisangebot" senkt die Hemmschwelle zur Anfrage
+- Knappheit: "Termine sind begrenzt." — subtil, nicht aggressiv, wirkt trotzdem
+- Trust-Bar: "1 Ansprechpartner für alles" > "3 Gewerke" — USP als Zahl, nicht als Liste
+- Wir-Stimme schlägt Passiv: "Wir halten Termine ein" > "Termine werden eingehalten"
+- SEO + Conversion aligned: Substantive (Fliesenleger) werden öfter gesucht UND wirken autoritärer
+
+**Presentation potential**: Yes — live Website-Review Format, direkt übertragbar auf jedes lokale Gewerbe
+
+## 2026-02-28 - The Favicon Bug That Breaks Chrome (And the One-Line Fix)
+
+**Category**: Tools | Architecture
+**Hook**: You added a beautiful SVG favicon. Chrome shows the old ugly one anyway. Here's why — and the exact fix.
+**Key points**:
+
+- Chromium bug (#40739400): when both `.ico` and `.svg` exist, Chrome always picks `.ico` if `sizes="any"` is on the ICO link
+- `sizes="any"` is the SVG attribute (means "scalable") — it has no spec meaning on an ICO link, so Chrome treats ICO as unconstrained and wins
+- Fix: `sizes="32x32"` on the ICO link + SVG link comes after (Evil Martians 2026 canonical order)
+- Full correct HTML: `<link rel="icon" href="/favicon.ico" sizes="32x32" />` then `<link rel="icon" type="image/svg+xml" href="/favicon.svg" />`
+- Hard refresh (`Cmd+Shift+R`) required after deploy to clear browser tab cache
+
+**Presentation potential**: No — too short, better as a tweet or tip post
+
+## 2026-02-28 - Was du einem Handwerker als Webentwickler noch verkaufen kannst
+
+**Category**: GTM | Strategy
+**Hook**: Die Website ist live — und jetzt? Hier ist der komplette Upsell-Stack für lokale Handwerksbetriebe, mit realistischen Preisen für den deutschen Markt.
+**Key points**:
+
+- Paket 1 (einmalig ~€200): Google Business Profile Setup + NAP-Konsistenz + Review-QR-Code
+- Paket 2 (einmalig ~€150): Review-Widget oder statische Testimonials + Kundenanleitung
+- Paket 3 (€100 Setup + €50–80/mo): Plausible Analytics (DSGVO-konform, kein Cookie-Banner) + monatliches Reporting
+- Paket 4 (€300–500 Setup + €150–300/mo): Google Ads lokale Suchanzeigen — erst nach organischem Fundament
+- Reihenfolge ist entscheidend: DNS → GBP → Search Console → Reviews → Analytics → Ads
+- Google Business Profile = größter lokaler SEO-Hebel, oft wichtiger als die Website selbst
+
+**Presentation potential**: Yes — Template zum Nachbauen für andere Webentwickler

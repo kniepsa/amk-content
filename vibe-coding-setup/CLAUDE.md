@@ -13,7 +13,7 @@ User Need → TypeScript/Next.js → Service Layer → Supabase RLS → Vercel D
 
 ## Stack Preferences
 
-- Frontend: Next.js 14+, React, Tailwind CSS
+- Frontend: Next.js 16+, React, Tailwind CSS
 - Backend: Supabase (PostgreSQL + RLS)
 - Package manager: pnpm (preferred)
 - Deploy: Vercel
@@ -35,6 +35,12 @@ User Need → TypeScript/Next.js → Service Layer → Supabase RLS → Vercel D
 - Interview Pattern: for complex features, have Claude interview you first → FRESH session to implement
 - **Supabase: `getSession()` trusts client JWT — use `getUser()` to validate server-side** (security: getSession can be spoofed)
 - **Next.js: `redirect()` throws internally** — wrapping in try/catch catches the throw and suppresses the redirect (it never fires)
+- **Glob tool can miss existing files** — if Glob returns empty for a known path, verify with `ls` via Bash before concluding the file doesn't exist
+- **Next.js 16: `middleware.ts` deprecated** → use Route Handlers instead
+- **Next.js 16: `params`/`searchParams`/`cookies()`/`headers()` → async only** — always `await` them
+- **Next.js 16: `revalidateTag()` requires `cacheLife` as 2nd argument** — update all API calls
+- **Next.js 16: `next lint` removed** → use `eslint` or Biome directly
+- **Next.js 16: Node.js 18 dropped** → require Node.js 20.9+
 
 ## API Error Handling
 
@@ -42,6 +48,25 @@ User Need → TypeScript/Next.js → Service Layer → Supabase RLS → Vercel D
 - Validation errors are INPUT feedback, not security-sensitive
 - NEVER hide validation errors behind `process.env.NODE_ENV === 'development'`
 - DO log validation errors with `console.error()` for server-side debugging
+
+## Vibe Coding Approach
+
+Use `/approach` before starting any new feature or app to select the right build sequence.
+
+| Mode             | When                                  | Rule                                                           |
+| ---------------- | ------------------------------------- | -------------------------------------------------------------- |
+| **Schema-First** | B2B, data-heavy, multi-tenant         | Freeze schema → API → UI (last)                                |
+| **UX-First**     | Consumer, dashboards, chart-driven    | Mockup first (v0.dev/Figma) → wire backend after user feedback |
+| **Bot-First**    | AI agents, automation, internal tools | Service layer → Telegram/curl validate → UI optional           |
+| **Parallel**     | Know both product + data model        | Only if schema stable ≥ 1 session with NO migrations           |
+
+**Hard Rules**:
+
+- Schema changes break everything → freeze schema BEFORE building UI
+- Telegram bot validates API logic, not product fit — UI feedback is still required
+- AI agrees with everything → explicitly say: "Challenge this. Evaluate short/medium/long-term."
+- Vague prompts cause churn → be specific: "drop shadow on buttons" not "make it prettier"
+- Parallel = dangerous unless: schema stable, UI has zero business logic, service layer is cleanly separated
 
 ## Workflow
 

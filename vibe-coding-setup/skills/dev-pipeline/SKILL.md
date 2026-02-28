@@ -48,7 +48,8 @@ To skip phases for simple features, the user can say `skip to BUILD` or `skip to
 
 ```
 Phase 1: CLARIFY  -----> [GATE: requirements clear?]
-Phase 2: DESIGN   -----> [GATE: scope defined?]
+Phase 2: DESIGN   -----> [GATE: scope + approach defined?]
+                  -----> [SCHEMA-FREEZE GATE: Schema-First / Parallel modes]
 Phase 3: PLAN     -----> [GATE: story validated?]
 Phase 4: BUILD    -----> [GATE: tests pass?]
 Phase 5: VERIFY   -----> [GATE: quality approved?]
@@ -92,16 +93,18 @@ If `execution/memory_ops.py` and `db/memory.db` exist in this project:
 
 ## Phase 2: DESIGN
 
-**Goal**: Product brief and system design.
+**Goal**: Select build approach, then create product brief and system design.
 
 **Actions**:
 
-1. Run the `/pm` command to create product brief
-2. Run the `/architect` command for system design
-3. These run in sequence: PM first (what), then architect (how)
+1. Run the `/approach` command — select build mode before any design work
+2. Run the `/pm` command to create product brief
+3. Run the `/architect` command for system design
+4. These run in sequence: approach (how to sequence) → PM (what) → architect (how)
 
 **Validation Gate**:
 
+- [ ] Build mode selected: UX-First / Schema-First / Bot-First / Parallel
 - [ ] MVP scope defined (must-have vs nice-to-have)
 - [ ] Data model identified
 - [ ] API endpoints listed (if applicable)
@@ -111,6 +114,28 @@ If `execution/memory_ops.py` and `db/memory.db` exist in this project:
 **TTS**: `"Design complete. Moving to planning."`
 
 **On failure**: Revisit PM brief or architecture. Ask user which part needs work.
+
+---
+
+## Schema-Freeze Gate
+
+**Applies to**: Schema-First and Parallel modes only. Skip for UX-First and Bot-First.
+
+Before advancing from DESIGN to PLAN, verify:
+
+```
+SCHEMA-FREEZE GATE
+==================
+[ ] Core entities defined (tables + fields)
+[ ] Relations defined (FK constraints)
+[ ] RLS policies drafted
+[ ] No schema migrations planned in next 2 sessions
+[ ] Schema reviewed via /architect
+
+GATE: [ ] OPEN → proceed to PLAN   [ ] CLOSED → keep iterating schema
+```
+
+**If gate is CLOSED**: Do not start BUILD or UI work. Return to `/architect` to stabilize the schema. Opening the gate requires the schema to be unchanged for ≥ 1 full session.
 
 ---
 

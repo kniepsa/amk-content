@@ -168,7 +168,7 @@ adr, advisory-debate, analyst, architect, audit-ecosystem, audit-setup, check-de
 
 ### Skills (`skills/*/SKILL.md`)
 
-architecture, debug-chain, decision-chain, deploy-check, dev-pipeline, onboard, plan, quality-chain, research, session-flow
+approach, architecture, debug-chain, decision-chain, deploy-check, dev-pipeline, last30days, learn, onboard, plan, quality-chain, research, session-flow
 
 ### Agents (`agents/*.md`)
 

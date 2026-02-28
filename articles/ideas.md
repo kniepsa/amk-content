@@ -1,5 +1,39 @@
 # Content Ideas
 
+## 2026-02-28 - Schema Freeze: Das einzige Vibe Coding Gate das zählt
+
+**Category**: Vibe Coding | Architecture
+**Hook**: Nicht "UI zuletzt" ist die Lösung — sondern Schema einfrieren bevor irgendetwas gebaut wird. Der echte Grund für endloses UI ↔ Backend Hin-und-Her.
+**Key points**:
+
+- Die 4 Build-Modi: UX-First / Schema-First / Bot-First / Parallel — wann was?
+- Telegram Bot validiert API-Logik, nicht Product Fit — unterschied ist entscheidend
+- Schema-Freeze Gate: "Hat sich das Schema seit letzter Session nicht geändert?" → erst dann UI
+- Parallel bauen = OK WENN: Schema stabil ≥ 1 Session, UI = zero Business-Logik, Service Layer clean getrennt
+- AI stimmt allem zu — explizit challengen: "Short-term, medium-term, long-term risks?"
+- Spezifische Prompts verhindern Churn: "drop shadow on buttons" vs. "make it prettier"
+
+**Presentation potential**: YES — konkrete Entscheidungsmatrix, löst einen der häufigsten Vibe Coding Pain Points
+
+---
+
+## 2026-02-28 - Vibe-Coding + Microservices: Nur trennen was die Runtime erzwingt
+
+**Category**: Vibe Coding | Architecture
+**Hook**: "Microservices" klingt professionell. Aber für Solo-Devs mit Claude Code killt jede Repo-Trennung die KI-Kontext-Sichtlinie. Wann ist die Trennung unvermeidbar — und wann ist sie Architekturfetisch?
+**Key points**:
+
+- Vibe-Coding lebt von vertikaler Sichtlinie: DB-Schema → Server → UI in einem Pass sichtbar
+- Headless/Backend-agnostisch = API-Contracts zwischen Layers = Claude muss 2-3 Repos traversieren
+- Die richtige Frage: "Erzwingt die Runtime die Trennung?" (Vercel serverless ≠ Railway Daemon → ja) vs. "Könnte man es trennen?" (DDD-Purismus → nein)
+- Supabase als Shared Message Bus ersetzt HTTP zwischen Agents: Status-Felder in Tabellen, kein Service-Discovery, kein API-Versioning
+- Ein DB, eine UI, mehrere Background-Workers: Multi-User löst Supabase Auth + RLS, nicht separate Apps
+- Regel: Minimum Separation = Runtime-Inkompatibilität, kein Schritt weiter
+
+**Presentation potential**: YES — konkrete Entscheidungsmatrix, addressiert häufigen Fehler bei AI-Coding-Stacks
+
+---
+
 ## 2026-02-27 - The Self-Annealing AI: Give Claude a SQLite Memory That Survives Context Resets
 
 **Category**: Vibe Coding | Tools

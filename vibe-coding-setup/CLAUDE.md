@@ -36,6 +36,7 @@ User Need → TypeScript/Next.js → Service Layer → Supabase RLS → Vercel D
 - **Supabase: `getSession()` trusts client JWT — use `getUser()` to validate server-side** (security: getSession can be spoofed)
 - **Next.js: `redirect()` throws internally** — wrapping in try/catch catches the throw and suppresses the redirect (it never fires)
 - **Glob tool can miss existing files** — if Glob returns empty for a known path, verify with `ls` via Bash before concluding the file doesn't exist
+- **`/sync-vibe-setup push` overwrites `~/.claude/CLAUDE.md`** — additions made only to the global file are lost. Source of truth = `vibe-coding-setup/CLAUDE.md`. Always add gotchas there first, then sync.
 - **Next.js 16: `middleware.ts` deprecated** → use Route Handlers instead
 - **Next.js 16: `params`/`searchParams`/`cookies()`/`headers()` → async only** — always `await` them
 - **Next.js 16: `revalidateTag()` requires `cacheLife` as 2nd argument** — update all API calls

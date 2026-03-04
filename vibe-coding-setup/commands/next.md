@@ -170,7 +170,13 @@ Als [detected role] kann ich [detected action], damit [detected benefit].
 ```
 
 4. **Add to NEXT.md**: Insert in Up Next section
-5. **Output**: "Created F-XXX: [Name]. Added to Up Next."
+5. **Create full PRD story file** (for features requiring >1 session):
+   - Run `/story "Feature Name"` → creates `.claude/stories/YYYY-MM-DD-name.md` with full context
+   - Run `/story-check` → validates completeness before implementation starts
+   - If story-check fails → fill gaps, re-run `/story-check` until PASSED
+   - **Story is the PRD**: it owns the full context, acceptance criteria, technical approach
+   - The F-XXX.md is the lightweight tracker; story file is the implementation contract
+6. **Output**: "Created F-XXX: [Name]. Story: .claude/stories/[file].md. Added to Up Next."
 
 ---
 
@@ -182,10 +188,10 @@ After **every write operation** (add, done, create, F-XXX set), sync NEXT.md sta
 mem task sync --project {project}
 ```
 
-After `create "Feature Name"`, also sync the PRD:
+After `create "Feature Name"` (once `/story-check` passes), sync the PRD:
 
 ```bash
-mem prd add "{feature name}" --project {project} --feature F-XXX --desc "{description}"
+mem prd add "{feature name}" --project {project} --feature F-XXX --desc "{one-line summary from story}"
 ```
 
 These keep the SQLite DB in sync so `list_tasks` / `list_prds` via MCP reflect current state.

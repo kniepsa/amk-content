@@ -174,6 +174,24 @@ Als [detected role] kann ich [detected action], damit [detected benefit].
 
 ---
 
+## SQLite Sync
+
+After **every write operation** (add, done, create, F-XXX set), sync NEXT.md state to SQLite:
+
+```bash
+mem task sync --project {project}
+```
+
+After `create "Feature Name"`, also sync the PRD:
+
+```bash
+mem prd add "{feature name}" --project {project} --feature F-XXX --desc "{description}"
+```
+
+These keep the SQLite DB in sync so `list_tasks` / `list_prds` via MCP reflect current state.
+
+---
+
 ## TTS Momentum Marker
 
 After updating task/feature/story:

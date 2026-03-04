@@ -174,7 +174,7 @@ Ready. Run /warmup to start.
 **Multi-app business (first project):**
 
 ```
-Vibe Coding V3 Installed (Multi-App)
+Vibe Coding v[VERSION] Installed (Multi-App)
 
 Business: [name]
 Project: [name] ([role])
@@ -200,7 +200,7 @@ Ready. Run /warmup to start.
 **Multi-app business (additional project):**
 
 ```
-Vibe Coding V3 Installed (Added to Business)
+Vibe Coding v[VERSION] Installed (Added to Business)
 
 Business: [name] (existing)
 Project: [name] ([role])

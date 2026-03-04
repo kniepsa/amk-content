@@ -105,22 +105,20 @@ Large:  6+ files, 90+ min, significant risk
         -> Consider using /architect instead
 ```
 
-### Step 6: Ask for Approval
+### Step 6: Native Plan Mode Approval
 
-Present the plan and ask:
+Use Claude's native plan mode to present the plan for user approval:
 
-```
-Proceed with this plan? [Y/n]
-Or adjust: [describe what to change]
-```
+1. Before starting Steps 1-5, invoke `EnterPlanMode` to enter plan mode
+2. After completing Step 5, call `ExitPlanMode` to signal the plan is ready
+3. The native plan mode UI handles the approval flow — no text "Proceed? [Y/n]" needed
 
-**Validation Gate**:
+**Validation Gate** (check before calling ExitPlanMode):
 
 - [ ] Files to change identified
 - [ ] Approach outlined (3-5 steps)
 - [ ] Risks assessed
 - [ ] Scope estimated
-- [ ] User approved
 
 **TTS**: `"Plan ready. Awaiting approval."`
 
@@ -151,7 +149,6 @@ EDGE CASES:
 
 SCOPE: [Small/Medium/Large] (~[time] estimate)
 ================================================
-Proceed? [Y/n]
 ```
 
 ---

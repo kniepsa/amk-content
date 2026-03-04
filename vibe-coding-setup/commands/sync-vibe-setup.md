@@ -164,11 +164,11 @@ Current files managed by this sync:
 
 ### Commands (`commands/*.md`)
 
-adr, advisory-debate, analyst, architect, audit-ecosystem, audit-setup, check-design, debt, debug, focus, gamma-api-setup, init-memory, install, learn, next, pm, quality-check, quick, refactor, session-end, ship, standup, story, story-check, strategy, sync-vibe-setup, test, update-baseline, ux-review, warmup
+adr, advisory-debate, analyst, architect, audit-ecosystem, audit-setup, check-design, debt, debug, focus, gamma-api-setup, init-memory, install, learn, mlp-scope, next, pm, quality-check, quick, refactor, session-end, ship, standup, story, story-check, strategy, sync-vibe-setup, test, update-baseline, ux-review, warmup, worktree
 
 ### Skills (`skills/*/SKILL.md`)
 
-approach, architecture, debug-chain, decision-chain, deploy-check, dev-pipeline, last30days, learn, onboard, plan, quality-chain, research, session-flow
+agent-browser, approach, architecture, debug-chain, decision-chain, deploy-check, dev-pipeline, last30days, learn, onboard, plan, quality-chain, research, session-flow
 
 ### Agents (`agents/*.md`)
 
@@ -176,7 +176,11 @@ builder, researcher, reviewer
 
 ### Hooks (`hooks/*.sh`)
 
-damage-control, notion-reminder (progress check), session-start, statusline
+damage-control, notion-reminder (progress check), play-tts, session-start, statusline
+
+### Global Hooks (`~/.claude/hooks/*.sh`)
+
+damage-control, notion-reminder, play-tts, quality-batch, quality-summary, security-scan, session-start, statusline
 
 ### Templates (`templates/.claude/`)
 

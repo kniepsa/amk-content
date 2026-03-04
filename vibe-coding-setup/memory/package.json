@@ -1,0 +1,25 @@
+{
+  "name": "@vibe/memory",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "ingest": "tsx ingest/index.ts",
+    "ingest:md": "tsx ingest/markdowns.ts",
+    "ingest:git": "tsx ingest/git-history.ts",
+    "ingest:files": "tsx ingest/files.ts",
+    "query": "tsx cli.ts",
+    "stats": "tsx cli.ts --stats",
+    "mcp": "tsx mcp-server.ts",
+    "query:backoffice": "tsx cli.ts --project backoffice-os"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "better-sqlite3": "^9.4.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.8",
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}

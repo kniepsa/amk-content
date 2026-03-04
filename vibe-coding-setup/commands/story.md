@@ -128,6 +128,18 @@ ACCEPTANCE:
 Run /story-check to validate, then start coding.
 ```
 
+## SQLite Sync
+
+After creating the story file, sync to SQLite as a PRD:
+
+```bash
+mem prd add "{story title}" --project {project} --desc "{one-line summary}"
+```
+
+This makes the story queryable via `list_prds` MCP tool and `mem prd list`.
+
+---
+
 ## Integration
 
 - `/warmup` liest aktive Story (Status: IN_PROGRESS)

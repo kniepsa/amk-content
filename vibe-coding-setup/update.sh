@@ -62,6 +62,13 @@ if [ -d "$SCRIPT_DIR/templates/.claude" ]; then
   echo "  templates/.claude/ copied"
 fi
 
+# Template hooks → also copy to global hooks so settings.json refs work
+if [ -d "$SCRIPT_DIR/templates/.claude/hooks" ]; then
+  cp "$SCRIPT_DIR/templates/.claude/hooks/"*.sh "$GLOBAL_DIR/hooks/" 2>/dev/null && \
+    echo "  template hooks/*.sh → hooks/ copied" || true
+  chmod +x "$GLOBAL_DIR/hooks/"*.sh 2>/dev/null || true
+fi
+
 # CLAUDE.md
 if [ -f "$SCRIPT_DIR/CLAUDE.md" ]; then
   cp "$SCRIPT_DIR/CLAUDE.md" "$GLOBAL_DIR/CLAUDE.md"

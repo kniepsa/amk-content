@@ -26,6 +26,17 @@ Run 2 parallel sessions max:
 
 Fresh context = better reviews. The reviewer hasn't seen the commits being made live.
 
+## In-Session Worktree (Native EnterWorktree)
+
+For isolated work within an existing Claude session, use the native `EnterWorktree` tool instead of the CLI flag:
+
+- Creates a temporary git worktree in `.claude/worktrees/` tied to the current session
+- Automatically cleaned up when the session ends (if no changes were made)
+- Use the `/worktree` slash command or say "work in a worktree" to trigger it
+- Accepts an optional name: `"start a worktree named feature/auth"`
+
+Best for single-session isolation where you want a clean slate without starting a new terminal session. The CLI `--worktree` flag is better for multi-session parallel work.
+
 ## Cleanup
 
 ```bash

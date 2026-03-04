@@ -50,8 +50,7 @@ Initialize vibe coding memory for this project:
 
 6. Create `.claude/GOLDEN_PATH.md` based on detected stack
 
-7. Symlink global post-commit hook if git repo:
-   `ln -sf ~/.claude/hooks/post-commit.mjs .git/hooks/post-commit`
+7. Optional: configure custom git hooks in `.git/hooks/` if needed for this project.
 
 8. Initialize execution memory:
 

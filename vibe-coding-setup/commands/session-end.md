@@ -243,6 +243,16 @@ If `.claude/features/` exists:
    - Keep only last 10 items
    - Remove items older than 7 days (if dated)
 
+### 3.4 Sync SQLite DB
+
+After updating NEXT.md, sync task state to SQLite so MCP tools reflect current status:
+
+```bash
+mem task sync --project {project}
+```
+
+This is idempotent — safe to run every session end. Captures completed tasks, new discoveries, and priority changes.
+
 ---
 
 ## 4. Cleanup

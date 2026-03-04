@@ -19,6 +19,7 @@ BRANCH=$(git -C "$PROJECT_DIR" branch --show-current 2>/dev/null || echo "unknow
 UNCOMMITTED=$(git -C "$PROJECT_DIR" status --porcelain 2>/dev/null | wc -l | tr -d ' ')
 LAST_COMMIT=$(git -C "$PROJECT_DIR" log -1 --format="%s" 2>/dev/null || echo "none")
 
+mkdir -p "$HOME/.claude/quality-state"
 CRITICAL_COUNT=0
 FINDINGS_FILE="$HOME/.claude/quality-state/findings.jsonl"
 if [ -f "$FINDINGS_FILE" ]; then

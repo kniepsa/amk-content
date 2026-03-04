@@ -42,6 +42,7 @@ User Need → TypeScript/Next.js → Service Layer → Supabase RLS → Vercel D
 - **Next.js 16: `revalidateTag()` requires `cacheLife` as 2nd argument** — update all API calls
 - **Next.js 16: `next lint` removed** → use `eslint` or Biome directly
 - **Next.js 16: Node.js 18 dropped** → require Node.js 20.9+
+- **Claude Code `settings.json` does NOT support `mcpServers`** — MCP servers go in `~/.mcp.json`, not `settings.json` (schema validation fails silently otherwise)
 
 ## API Error Handling
 
@@ -49,6 +50,10 @@ User Need → TypeScript/Next.js → Service Layer → Supabase RLS → Vercel D
 - Validation errors are INPUT feedback, not security-sensitive
 - NEVER hide validation errors behind `process.env.NODE_ENV === 'development'`
 - DO log validation errors with `console.error()` for server-side debugging
+
+## Ultrafast Vibe Coding
+
+**Speed = minimal code + shared components.** Before writing any component: check shadcn/ui → project shared package → only then build custom. Less code = faster build + fewer bugs.
 
 ## Vibe Coding Approach
 

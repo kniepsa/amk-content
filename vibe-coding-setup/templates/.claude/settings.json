@@ -1,4 +1,9 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "model": "sonnet",
+  "skipDangerousModePermissionPrompt": true,
   "hooks": {
     "SessionStart": [
       {
@@ -17,7 +22,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/notion-reminder.sh",
+            "command": "~/.claude/hooks/notion-reminder.sh 2>/dev/null || true",
             "async": true
           }
         ]
